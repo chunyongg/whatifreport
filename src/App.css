@@ -58,3 +58,7 @@ html {
   display: flex;
   justify-content: flex-end;
 }
+
+.emoji-font {
+  font-family: 'Noto Emoji', sans-serif;
+}

@@ -128,7 +128,7 @@ function HomePage() {
               </td>
               <td className={styles.td}>
                 <input className={styles.textinput} />
-                &nbsp;🔍︎
+                &nbsp;🔍
               </td>
               <td className={styles.td}>
                 <div className="align-right">4.00</div>
