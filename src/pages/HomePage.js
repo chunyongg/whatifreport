@@ -3,7 +3,7 @@ import Page from '../components/Page'
 
 function HomePage() {
   return (
-    <Page>HomePage</Page>
+    <Page title="Create What-if Scenario">HomePage</Page>
   )
 }
 
