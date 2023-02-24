@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Page from '../components/Page';
 import styles from "./HomePage.module.css";
 import BlueButton from '../components/BlueButton';
@@ -6,6 +6,25 @@ import GreenButton from '../components/GreenButton';
 import ShortGreenButton from '../components/ShortGreenButton';
 
 function HomePage() {
+  // TODO: Modify static data after implementing add module functionality
+  const [moduleCart, setModuleCart] = useState([
+    {
+      subject: "CS",
+      catalogNbr: "4249",
+      courseName: "Phenomena and Theories of Human-Computer Interaction",
+    },
+    {
+      subject: "ACC",
+      catalogNbr: "1701X",
+      courseName: "Accounting for Decision Makers",
+    },
+    {
+      subject: "GET",
+      catalogNbr: "1050",
+      courseName: "Computational Reasoning",
+    },
+  ]);
+
   return (
     <Page title="Create What-if Scenario">
       <p className={styles.p}>
@@ -112,32 +131,32 @@ function HomePage() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className={styles.td}>
-                <div className="align-right">1</div>
-              </td>
-              <td className={styles.td}>2220</td>
-              <td className={styles.td}>CS</td>
-              <td className={styles.td}>4249</td>
-              <td className={styles.td}>
-                Phenomena and Theories of Human-Computer Interaction
-              </td>
-              <td className={styles.td}>GRD</td>
-              <td className={styles.td}>
-                <input type="checkbox" />
-              </td>
-              <td className={styles.td}>
-                <input className={styles.textinput} />
-                &nbsp;🔍
-              </td>
-              <td className={styles.td}>
-                <div className="align-right">4.00</div>
-              </td>
-              <td className={styles.td}></td>
-              <td className={styles.td} style={{ textAlign: "center" }}>
-                <button className={styles.removebutton}>—</button>
-              </td>
-            </tr>
+            {moduleCart.map((module, index) => (
+              <tr key={index}>
+                <td className={styles.td}>
+                  <div className="align-right">{index+1}</div>
+                </td>
+                <td className={styles.td}>2220</td>
+                <td className={styles.td}>{module.subject}</td>
+                <td className={styles.td}>{module.catalogNbr}</td>
+                <td className={styles.td}>{module.courseName}</td>
+                <td className={styles.td}>GRD</td>
+                <td className={styles.td}>
+                  <input type="checkbox" />
+                </td>
+                <td className={styles.td}>
+                  <input className={styles.textinput} />
+                  &nbsp;🔍
+                </td>
+                <td className={styles.td}>
+                  <div className="align-right">4.00</div>
+                </td>
+                <td className={styles.td}></td>
+                <td className={styles.td} style={{ textAlign: "center" }}>
+                  <button className={styles.removebutton}>—</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <br />
