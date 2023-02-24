@@ -42,7 +42,7 @@ function HomePage() {
           </tbody>
         </table>
       </p>
-      {/* <GreenButton>Submit Request</GreenButton> */}
+      <GreenButton>Submit Request</GreenButton>
     </Page>
   );
 }

@@ -1,4 +1,4 @@
-.greenbutton {
+.button {
   font-family: Arial,sans-serif;
   font-size: 11px;
   font-weight: normal;
@@ -25,7 +25,7 @@
   padding: 0 12px;
 }
 
-.greenbutton:hover {
+.button:hover {
   color: rgb(58,98,55);
   background-color: rgb(182,209,146);
   border-top-color: rgb(76,140,64);

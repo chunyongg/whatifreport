@@ -3,7 +3,7 @@ import styles from "./GreenButton.module.css";
 
 function GreenButton(props) {
   return (
-    <button className={styles.greenbutton}>{props.children}</button>
+    <button className={styles.button}>{props.children}</button>
   )
 }
 
