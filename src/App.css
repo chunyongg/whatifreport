@@ -44,6 +44,10 @@ body {
   padding: 0;
 }
 
+html {
+    overflow: hidden;
+}
+
 * {
   box-sizing: border-box;
   font-family: Arial,Helvetica,sans-serif;
