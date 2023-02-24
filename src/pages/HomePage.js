@@ -7,9 +7,9 @@ import GreenButton from '../components/GreenButton';
 function HomePage() {
   return (
     <Page title="Create What-if Scenario">
-      <p>
-        <h1>Create What-if Scenario</h1>
-        <h4>
+      <p className={styles.p}>
+        <h1 className={styles.h1}>Create What-if Scenario</h1>
+        <h4 className={styles.h4}>
           You may be thinking of changing your program of study or taking
           certain courses. Using this page, you can set up a what-if scenario
           based on different academic programs or courses. Select the Submit
@@ -20,29 +20,50 @@ function HomePage() {
           <BlueButton>Return To Report Selection</BlueButton>
         </div>
       </p>
-      <p>
-        <h2>Career Scenario</h2>
-        <h4>
-          &nbsp;Select a career for which you want the change to take place.
+      <p className={styles.p}>
+        <h2 className={styles.h2}>Career Scenario</h2>
+        <h4 className={styles.h4}>
+          &ensp;Select a career for which you want the change to take place.
         </h4>
-        <table>
+        <br />
+        <table className={styles.table}>
           <thead>
             <tr>
-              <th>Institution</th>
-              <th>Program</th>
-              <th>Requirement Term</th>
+              <th className={styles.th}>Institution</th>
+              <th className={styles.th}>Program</th>
+              <th className={styles.th}>Requirement Term</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>NUS</td>
-              <td>Bachelor of Computing</td>
-              <td>2019/2020 Semester 1</td>
+              <td className={styles.td}>NUS</td>
+              <td className={styles.td}>Bachelor of Computing</td>
+              <td className={styles.td}>2019/2020 Semester 1</td>
             </tr>
           </tbody>
         </table>
+        <br />
+        <div className="align-right">
+          <GreenButton>Submit Request</GreenButton>
+        </div>
       </p>
-      <GreenButton>Submit Request</GreenButton>
+      <p className={styles.p}>
+        <h2 className={styles.h2}>Program Scenario</h2>
+        <table className={styles.table}>
+          <tr className={styles.trcol}>
+            <td className={styles.td1}>Program: Bachelor of Computing</td>
+            <td className={styles.td2}></td>
+            <td className={styles.td3}>NUS | Undergraduate</td>
+            <td className={styles.td4}>
+              Degree: BComp (Computer Science)
+              <br />
+              &emsp;&emsp;Honors: Computer Science (Hons)
+              <br />
+              Minor: Interactive Media Dev (Minor)
+            </td>
+          </tr>
+        </table>
+      </p>
     </Page>
   );
 }
