@@ -17,6 +17,9 @@
   align-items: center;
 
   border-bottom: 1px solid #bcbcbc;
+
+  font-weight: bold;
+  font-size: 19.8px;
 }
 
 .content {
