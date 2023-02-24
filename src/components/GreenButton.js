@@ -3,8 +3,10 @@ import styles from "./GreenButton.module.css";
 
 function GreenButton(props) {
   return (
-    <button className={styles.button}>{props.children}</button>
-  )
+    <button className={styles.button} onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 }
 
 export default GreenButton

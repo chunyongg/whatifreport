@@ -4,6 +4,7 @@ import styles from "./HomePage.module.css";
 import BlueButton from '../components/BlueButton';
 import GreenButton from '../components/GreenButton';
 import ShortGreenButton from '../components/ShortGreenButton';
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   // TODO: Modify static data after implementing add module functionality
@@ -24,6 +25,12 @@ function HomePage() {
       courseName: "Computational Reasoning",
     },
   ]);
+
+  const navigate = useNavigate();
+  const openCourseCatalog = () => {
+    console.log("HI");
+    navigate("/catalog");
+  }
 
   return (
     <Page title="Create What-if Scenario">
@@ -94,7 +101,9 @@ function HomePage() {
           <br />
           &ensp;scenario.
         </h4>
-        <ShortGreenButton>browse course catalog</ShortGreenButton>
+        <ShortGreenButton onClick={openCourseCatalog}>
+          browse course catalog
+        </ShortGreenButton>
         <div style={{ height: "5px" }} />
         <table className={styles.table}>
           <thead>
@@ -134,7 +143,7 @@ function HomePage() {
             {moduleCart.map((module, index) => (
               <tr key={index}>
                 <td className={styles.td}>
-                  <div className="align-right">{index+1}</div>
+                  <div className="align-right">{index + 1}</div>
                 </td>
                 <td className={styles.td}>2220</td>
                 <td className={styles.td}>{module.subject}</td>
