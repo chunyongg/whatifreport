@@ -2,10 +2,14 @@ h1 {
   font-size: 16px;
   color: rgb(74,89,140);
   font-family: Georgia,"Times New Roman",serif;
+  margin: 0;
 }
 
 h2 {
+  font-family: Verdana,Arial,sans-serif;
   font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
   color: rgb(74,89,140);
 }
 
@@ -18,4 +22,8 @@ h4 {
   color: black;
   font-weight: 400;
   font-family: Verdana,Arial,sans-serif;
+}
+
+p {
+  margin-bottom: 0;
 }
