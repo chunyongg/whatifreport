@@ -92,10 +92,12 @@
   border-style: solid;
   display: block;
   width: 566px;
+  margin-left: 4px;
 }
 
 .td2 {
-  padding: 0;
+  padding: 1.5px;
+  margin-left: 4px;
 }
 
 .td3 {
@@ -110,6 +112,8 @@
   border-style: solid;
   display: block;
   width: 565px;
+  margin-left: 4px;
+  padding: 2px;
 }
 
 .td4 {
@@ -124,10 +128,11 @@
   border-style: solid;
   border-top-style: none;
   display: block;
-  padding-top: 15px;
-  padding-left: 15px;
+  padding-top: 12px;
+  padding-left: 12px;
   padding-bottom: 5px;
   width: 565px;
+  margin-left: 4px;
 }
 
 .textinput {

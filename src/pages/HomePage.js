@@ -17,6 +17,7 @@ function HomePage() {
           Request button to request a degree progress report based on your
           what-if information.
         </h4>
+        <div style={{ height: "3px" }} />
         <div className="align-right">
           <BlueButton>Return To Report Selection</BlueButton>
         </div>
@@ -64,10 +65,11 @@ function HomePage() {
             </td>
           </tr>
         </table>
+        <div style={{ height: "10px" }} />
       </p>
       <p className={styles.p}>
         <h2 className={styles.h2}>Course Scenario</h2>
-        <h4 className={styles.h4}>
+        <h4 className={styles.h4} style={{ margin: "20px 0" }}>
           &ensp;Select the "browse course catalog" button and then select
           courses for inclusion in your course what-if
           <br />
@@ -111,7 +113,9 @@ function HomePage() {
           </thead>
           <tbody>
             <tr>
-              <td className={styles.td}>1</td>
+              <td className={styles.td}>
+                <div className="align-right">1</div>
+              </td>
               <td className={styles.td}>2220</td>
               <td className={styles.td}>CS</td>
               <td className={styles.td}>4249</td>
@@ -136,6 +140,11 @@ function HomePage() {
             </tr>
           </tbody>
         </table>
+        <br />
+        <br />
+        <div className="align-right">
+          <GreenButton>Generate What-If Report</GreenButton>&emsp;&nbsp;
+        </div>
       </p>
     </Page>
   );
