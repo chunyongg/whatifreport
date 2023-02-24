@@ -3,6 +3,7 @@ import Page from '../components/Page';
 import styles from "./HomePage.module.css";
 import BlueButton from '../components/BlueButton';
 import GreenButton from '../components/GreenButton';
+import ShortGreenButton from '../components/ShortGreenButton';
 
 function HomePage() {
   return (
@@ -62,6 +63,78 @@ function HomePage() {
               Minor: Interactive Media Dev (Minor)
             </td>
           </tr>
+        </table>
+      </p>
+      <p className={styles.p}>
+        <h2 className={styles.h2}>Course Scenario</h2>
+        <h4 className={styles.h4}>
+          &ensp;Select the "browse course catalog" button and then select
+          courses for inclusion in your course what-if
+          <br />
+          &ensp;scenario.
+        </h4>
+        <ShortGreenButton>browse course catalog</ShortGreenButton>
+        <div style={{ height: "5px" }} />
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th className={styles.th} width={20}></th>
+              <th className={styles.th} width={39}>
+                Term
+              </th>
+              <th className={styles.th} width={49}>
+                Subject
+              </th>
+              <th className={styles.th} width={56}>
+                Catalog Nbr
+              </th>
+              <th className={styles.th} width={142}>
+                Course Name
+              </th>
+              <th className={styles.th} width={60}>
+                Grading Basis
+              </th>
+              <th className={styles.th} width={46}>
+                S/U Option
+              </th>
+              <th className={styles.th} width={55}>
+                Grade
+              </th>
+              <th className={styles.th} width={65}>
+                Units
+              </th>
+              <th className={styles.th} width={55}>
+                Topic ID
+              </th>
+              <th className={styles.th} width={25}></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className={styles.td}>1</td>
+              <td className={styles.td}>2220</td>
+              <td className={styles.td}>CS</td>
+              <td className={styles.td}>4249</td>
+              <td className={styles.td}>
+                Phenomena and Theories of Human-Computer Interaction
+              </td>
+              <td className={styles.td}>GRD</td>
+              <td className={styles.td}>
+                <input type="checkbox" />
+              </td>
+              <td className={styles.td}>
+                <input className={styles.textinput} />
+                &nbsp;🔍︎
+              </td>
+              <td className={styles.td}>
+                <div className="align-right">4.00</div>
+              </td>
+              <td className={styles.td}></td>
+              <td className={styles.td} style={{ textAlign: "center" }}>
+                <button className={styles.removebutton}>—</button>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </p>
     </Page>

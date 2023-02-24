@@ -32,6 +32,7 @@
   width: 100%;
   table-layout: fixed;
   display: table;
+  border-collapse: collapse;
 }
 
 .trcol {
@@ -45,8 +46,6 @@
   color: rgb(74,89,140);
   background-color: rgb(218,226,238);
   vertical-align: middle;
-  padding-top: 2px;
-  padding-bottom: 2px;
   border-top-width: 1px;
   border-bottom-width: 1px;
   border-right-width: 1px;
@@ -56,6 +55,7 @@
   border-top-style: solid;
   border-bottom-style: solid;
   border-right-style: solid;
+  padding: 2px;
 }
 
 .td {
@@ -66,13 +66,13 @@
   color: rgb(0,0,0);
   background-color: rgb(247,247,247);
   vertical-align: middle;
-  padding-top: 2px;
   border-bottom-width: 1px;
   border-right-width: 1px;
   border-bottom-color: rgb(255,255,255);
   border-right-color: rgb(255,255,255);
   border-bottom-style: solid;
   border-right-style: solid;
+  padding: 2px;
 }
 
 .td1 {
@@ -91,6 +91,7 @@
   border-color: rgb(74,89,140);
   border-style: solid;
   display: block;
+  width: 566px;
 }
 
 .td2 {
@@ -105,8 +106,10 @@
   text-decoration: none;
   border-width: 1px;
   border-color: rgb(193,201,219);
+  border-bottom-color: #8094c4;
   border-style: solid;
   display: block;
+  width: 565px;
 }
 
 .td4 {
@@ -119,8 +122,35 @@
   border-width: 1px;
   border-color: rgb(193,201,219);
   border-style: solid;
+  border-top-style: none;
   display: block;
   padding-top: 15px;
   padding-left: 15px;
   padding-bottom: 5px;
+  width: 565px;
+}
+
+.textinput {
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 10px;
+  font-weight: normal;
+  font-style: normal;
+  color: rgb(0,0,0);
+  width: 34px;
+  height: 16px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.removebutton {
+  width: 18px;
+  height: 16px;
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 11px;
+  font-weight: bolder;
+  font-style: normal;
+  color: #4e62a9;
+  padding: 0;
+  border: 1px solid #5e76b8;
+  background: #dcecfc;
 }
