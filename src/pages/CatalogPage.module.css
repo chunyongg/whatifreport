@@ -1,0 +1,63 @@
+.text {
+    font-family: Arial;
+    font-size: 16pt;
+    font-weight: normal;
+    font-style: normal;
+    color: rgb(68,101,144);
+    padding-bottom: 3px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(187,187,187);
+    border-bottom-style: solid;
+    margin: 0;
+    padding: 8px 0px;
+    text-align: start;
+}
+
+.filterText {
+    font-family: Arial;
+    font-size: 13pt;
+    padding: 0px 4px;
+    color: rgb(68,101,144);
+    cursor: pointer;
+}
+
+.hoverUnderline:hover {
+    text-decoration: underline;
+    text-decoration-color: #b26a2f;
+    color: #b26a2f;
+}
+
+.moduleList {
+    margin: 20px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.marginVertical {
+    margin: 30px 30px;
+}
+
+.container {
+    width: 100%;
+    text-align: start;
+}
+
+.nameText {
+    font-family: Arial;
+    font-size: 15pt;
+    font-weight: normal;
+    font-style: normal;
+    color: rgb(81,81,81);
+    text-align: start;
+}
+
+.filterBox {
+    width: 50%;
+    border: 1px solid rgb(81,81,81);
+    padding: 50px;
+    margin: 20px;
+}
