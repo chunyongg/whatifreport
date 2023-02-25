@@ -1,0 +1,22 @@
+.button {
+display:inline-block;
+border: 1px solid #d8a676 !important;
+border-radius: 2px 2px 2px 2px;
+text-decoration:none; 
+cursor:pointer;
+height:20px;
+cursor:pointer;
+margin-right: 5px;
+background: #fae7c5;
+font-family: Arial,sans-serif;
+font-size: 9pt;
+font-weight: normal;
+font-style: normal;
+color: rgb(51,51,51);
+margin: 2px;
+padding: 2px 15px;
+}
+
+.button:hover {
+    background-color: #fbd9a5;
+}

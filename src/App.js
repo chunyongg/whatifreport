@@ -1,17 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
 import { Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
+import VerificationPage from './pages/VerificationPage';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from './reducers'
+
+const store = createStore(rootReducer)
+
 
 function App() {
   return (
+    <Provider store={store}>
     <div className="App">
       <Routes>
-        <Route path="/" element={<CatalogPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/verify" element={<VerificationPage />} />
       </Routes>
     </div>
+    </Provider>
+
   );
 }
 

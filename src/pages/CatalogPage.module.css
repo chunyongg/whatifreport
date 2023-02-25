@@ -1,5 +1,5 @@
-.text {
-    font-family: Arial;
+.primaryText {
+    width: 100vw;
     font-size: 16pt;
     font-weight: normal;
     font-style: normal;
@@ -13,12 +13,26 @@
     text-align: start;
 }
 
+.selectedFilterText {
+  font-size: 13pt;
+  padding: 0px 4px;
+  color: #1010ef;
+  text-decoration: underline;
+  text-decoration-color: #1010ef;
+  cursor: pointer;
+}
+
 .filterText {
-    font-family: Arial;
     font-size: 13pt;
     padding: 0px 4px;
     color: rgb(68,101,144);
     cursor: pointer;
+}
+
+.filterText:hover {
+  text-decoration: underline;
+  text-decoration-color: #b26a2f;
+  color: #b26a2f;
 }
 
 .hoverUnderline:hover {
@@ -34,7 +48,7 @@
 .row {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: start;
 }
 
 .marginVertical {
@@ -46,6 +60,12 @@
     text-align: start;
 }
 
+.container p {
+    font-family: Arial;
+    font-weight: normal;
+    font-style: normal;
+}
+
 .nameText {
     font-family: Arial;
     font-size: 15pt;
@@ -55,9 +75,106 @@
     text-align: start;
 }
 
+.moduleBox {
+    width: 100%;
+    border: 1px solid rgb(197, 194, 194);
+    padding: 0px 30px;
+    margin: 20px;
+}
+
 .filterBox {
-    width: 50%;
+    width: 100%;
     border: 1px solid rgb(81,81,81);
     padding: 50px;
     margin: 20px;
 }
+
+.filterRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.collapse {
+  font-size: 15px !important;
+  width: 175px;
+  height: 25px !important;
+  margin-right: 16px !important;
+}
+
+.expand {
+  font-size: 15px !important;
+  width: 175px;
+  height: 25px !important;
+  margin-right: 16px !important;
+}
+
+.cancel {
+  font-size: 15px !important;
+  width: 115px;
+  height: 25px !important;
+}
+
+.table {
+    width: 100%;
+    table-layout: fixed;
+    display: table;
+    border-collapse: collapse;
+    margin: 20px;
+    margin-top: 4px;
+  }
+
+  .th {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #4b6987;
+    background-color: #f9f9f9;
+    vertical-align: middle;
+    border-width: 1px;
+    border-color: rgb(230,230,230);
+    border-style: solid;
+    padding: 2px;
+  }
+
+  .td {
+    color: #004b91;
+    font-family: Arial,sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 100%;
+    vertical-align: middle;
+    border-width: 1px;
+    border-color: rgb(230,230,230);
+    border-style: solid;
+    padding: 8px 4px;
+  }
+
+  .td:hover {
+    text-decoration: underline;
+    text-decoration-color: #b26a2f;
+    color: #b26a2f;
+    cursor: pointer;
+  }
+
+  .select {
+    font-size: 15px;
+  }
+
+  .firstCol {
+    text-align: center;
+  }
+
+  .first {
+    background-color: #f0ecec;
+  }
+
+  .odd {
+    background-color: #fff;
+  }
+
+  .even {
+    background-color: #f9f8f9;
+  }
