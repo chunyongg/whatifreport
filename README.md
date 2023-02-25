@@ -5,8 +5,12 @@ This project is created as part of CS4249 in the National University of Singapor
 ## Contributors
 
 Cheryl Koh Shi Hua
+
 Wang Xinru
+
 Cheng Jiyuqing
+
 Neo Rui En Maybelline
+
 Lim Chun Yong
 
