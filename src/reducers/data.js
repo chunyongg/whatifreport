@@ -1086,7 +1086,7 @@ const subjectNames = [
   "Computational Biology",    
 ]
 
-const moduleSubjects = subjectCodes.map((code, i) => ({name: moduleSubjects[i], subject: code}))
+const moduleSubjects = subjectCodes.map((code, i) => ({name: subjectNames[i], subject: code}))
 
 const DEFAULT_DATA = {
     moduleSubjects: moduleSubjects,
