@@ -7,7 +7,6 @@ import ShortGreenButton from '../components/ShortGreenButton';
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { removeModule } from "../actions";
-
 function HomePage({moduleCart, removeModule}) {
   const navigate = useNavigate();
   const openCourseCatalog = () => {

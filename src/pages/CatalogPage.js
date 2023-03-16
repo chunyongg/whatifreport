@@ -7,7 +7,6 @@ import ShortYellowButton from "../components/ShortYellowButton";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { addModule } from "../actions";
-
 function Header() {
   return (
     <>
