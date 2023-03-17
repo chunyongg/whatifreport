@@ -9,7 +9,6 @@ import Popup from "../components/Popup";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { removeModule } from "../actions";
-import { editableInputTypes } from '@testing-library/user-event/dist/utils';
 
 function HomePage({moduleCart, removeModule}) {
   const navigate = useNavigate();

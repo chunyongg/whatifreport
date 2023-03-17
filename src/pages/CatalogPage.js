@@ -1,12 +1,14 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { addModule } from "../actions";
+
 import Page from "../components/Page";
 import styles from "./CatalogPage.module.css";
 import triangle from "../assets/triangle.jpg";
 import openTriangle from "../assets/triangle-expanded.jpg";
-import React, { useState } from "react";
 import ShortYellowButton from "../components/ShortYellowButton";
-import { useNavigate } from "react-router-dom";
-import { connect } from "react-redux";
-import { addModule } from "../actions";
+import SearchIcon from "../assets/Search.png";
 
 function Header() {
   return (
@@ -19,7 +21,7 @@ function Header() {
   );
 }
 
-function UtilityButtons({collapse, expand, navigateBack}) {
+function UtilityButtons({ collapse, expand, navigateBack }) {
   return (
     <div className={styles.filterRow}>
       <ShortYellowButton className={styles.collapse} onClick={collapse}>
@@ -35,7 +37,21 @@ function UtilityButtons({collapse, expand, navigateBack}) {
   );
 }
 
-function FilterArea({ callback, currentFilter, collapse, expand, navigateBack }) {
+function FilterButtons({ items, currentFilter, callback }) {
+  return items.map((item, i) => (
+    <div
+      key={i}
+      className={
+        item === currentFilter ? styles.selectedFilterText : styles.filterText
+      }
+      onClick={() => callback(item)}
+    >
+      {item}
+    </div>
+  ));
+}
+
+function FilterBoxByAlphabet({ callback, currentFilter }) {
   const letters = [
     "A",
     "B",
@@ -65,46 +81,103 @@ function FilterArea({ callback, currentFilter, collapse, expand, navigateBack })
     "Z",
   ];
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  const mapped = letters.map((letter, i) => (
-    <div
-      key={i}
-      className={
-        letter === currentFilter ? styles.selectedFilterText : styles.filterText
-      }
-      onClick={() => callback(letter)}
-    >
-      {letter}
-    </div>
-  ));
-  const mappedNumbers = numbers.map((number, i) => (
-    <div
-      key={i}
-      className={
-        number === currentFilter ? styles.selectedFilterText : styles.filterText
-      }
-      onClick={() => callback(number)}
-      style={{ marginLeft: "2px" }}
-    >
-      {number}
-    </div>
-  ));
   return (
-    <>
-      <div className={styles.filterBox}>
-        <div className={styles.mappedBox} style={{ marginLeft: "15px" }}>
-          {mapped}
-        </div>
-        <div className={styles.mappedBox} style={{ marginLeft: "230px" }}>
-          {mappedNumbers}
-        </div>
+    <div className={styles.filterBox} style={{padding: "0", paddingBottom: "5px"}}>
+      <div className={styles.mappedBox} style={{ marginLeft: "15px" }}>
+        <FilterButtons
+          items={letters}
+          currentFilter={currentFilter}
+          callback={callback}
+        />
       </div>
-      <UtilityButtons
-        collapse={collapse}
-        expand={expand}
-        navigateBack={navigateBack}
-      />
-    </>
+      <div className={styles.mappedBox} style={{ marginLeft: "230px" }}>
+        <FilterButtons
+          items={numbers}
+          currentFilter={currentFilter}
+          callback={callback}
+        />
+      </div>
+    </div>
   );
+}
+
+function FilterBoxByRelevance({ callback, currentFilter }) {
+  const highPriorityReqs = [
+    "Faculty Requirements",
+    "Major Requirements",
+    "General Education Requirements",
+  ];
+  const lowPriorityReqs = [
+    "Minor Requirements",
+    "Unrestricted Electives Requirements",
+  ];
+  return (
+    <div className={styles.filterBox}>
+      <div className={styles.mappedBox} style={{ justifyContent: "center" }}>
+        <FilterButtons
+          items={highPriorityReqs}
+          currentFilter={currentFilter}
+          callback={callback}
+        />
+      </div>
+      <div className={styles.mappedBox} style={{ justifyContent: "center" }}>
+        <FilterButtons
+          items={lowPriorityReqs}
+          currentFilter={currentFilter}
+          callback={callback}
+        />
+      </div>
+    </div>
+  );
+}
+
+function FilterBoxBySearch({ callback }) {
+  const [query, setQuery] = useState("");
+  const handleOnChange = (event) => {
+    setQuery(event.target.value);
+  };
+
+  useEffect(() => {
+    const timeOutId = setTimeout(() => callback(query), 500);
+    return () => clearTimeout(timeOutId);
+  }, [query]);
+
+  return (
+    <div className={styles.filterBox}>
+      <div className={styles.searchBox}>
+        <img src={SearchIcon} width={15} alt="Search" />
+        <input
+          className={styles.inputArea}
+          placeholder="Search for modules by keywords"
+          value={query}
+          onChange={handleOnChange}
+        />
+      </div>
+    </div>
+  );
+}
+
+function FilterBox({ iv1, currentFilter, callback }) {
+  switch (iv1) {
+    case "Alphabet":
+      return (
+        <FilterBoxByAlphabet
+          currentFilter={currentFilter}
+          callback={callback}
+        />
+      );
+    case "Relevance":
+      return (
+        <FilterBoxByRelevance
+          currentFilter={currentFilter}
+          callback={callback}
+        />
+      );
+    case "Search":
+      return <FilterBoxBySearch callback={callback} />;
+    default:
+      return <div>Invalid Filter</div>;
+  }
 }
 
 function ModuleCategory({
@@ -238,26 +311,40 @@ function ModuleSubjects({
   );
 }
 
-function CatalogPage({ addModule, data }) {
+function CatalogPage({ addModule, data, iv1 }) {
   const [currentFilter, setFilter] = useState("A");
   const [selectedModuleSubjects, addSubject] = useState([]);
   const { moduleSubjects, allModules } = data;
 
+  /* Select */
   const selectSubject = (subj) => {
     addSubject((prev) => [...prev, subj]);
   };
-  const unselectSubject = (subjToRemove) =>
+
+  /* Unselect */
+  const unselectSubject = (subjToRemove) => {
     addSubject((prev) => prev.filter((subj) => subj !== subjToRemove));
-  const callback = (letter) => setFilter(letter);
+  };
+
+  /* Set filter */
+  const callback = (filter) => {
+    setFilter(filter);
+  };
+
+  /* Collapse all accordions */
   const collapse = () => {
     addSubject([]);
   };
+
+  /* Expand all accordions */
   const expand = () => {
     for (const module of moduleSubjects) {
       const subject = module.subject;
       addSubject((prev) => [...prev, subject]);
     }
   };
+
+  /* Navigate back to home page */
   const navigate = useNavigate();
   const navigateBack = () => navigate(-1);
 
@@ -265,9 +352,12 @@ function CatalogPage({ addModule, data }) {
     <Page>
       <div className={styles.container}>
         <Header />
-        <FilterArea
+        <FilterBox
+          iv1={iv1}
           callback={callback}
           currentFilter={currentFilter}
+        />
+        <UtilityButtons
           collapse={collapse}
           expand={expand}
           navigateBack={navigateBack}
