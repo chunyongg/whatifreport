@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-import Page from '../components/Page';
+import Page from '../../components/Page';
 import styles from "./HomePage.module.css";
-import BlueButton from '../components/BlueButton';
-import GreenButton from '../components/GreenButton';
-import ShortGreenButton from '../components/ShortGreenButton';
-import Popup from "../components/Popup";
+import BlueButton from '../../components/BlueButton';
+import GreenButton from '../../components/GreenButton';
+import ShortGreenButton from '../../components/ShortGreenButton';
+import Popup from "../../components/Popup";
 
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { removeModule } from "../actions";
+import { removeModule } from "../../actions";
 
 function HomePage({moduleCart, removeModule}) {
   const navigate = useNavigate();

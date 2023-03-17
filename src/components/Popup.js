@@ -7,7 +7,7 @@ function Popup(props) {
   return (
     <Modal
       {...props}
-      size="lg"
+      size="md"
       animation={false}
       backdrop="static"
       keyboard={false}

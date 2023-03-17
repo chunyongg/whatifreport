@@ -2,9 +2,9 @@
 import React from 'react';
 import { connect } from "react-redux";
 import styles from "./VerificationPage.module.css";
-import BlueButton from "../components/BlueButton";
+import BlueButton from "../../components/BlueButton";
 import { useNavigate } from 'react-router-dom';
-import { getSuccessCode } from '../constants';
+import { getSuccessCode } from '../../constants';
 
 function Pass() {
   const code = getSuccessCode().toString();
@@ -12,7 +12,6 @@ function Pass() {
     <div className={styles.container}>
       <h1 className={styles.green}>Graduation requirements passed</h1>
       <p>Success code: <span className={styles.big}>{code}</span></p>
-      
     </div>
   )
 }
