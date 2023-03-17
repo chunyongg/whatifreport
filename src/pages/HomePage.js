@@ -13,7 +13,7 @@ function HomePage({moduleCart, removeModule}) {
     navigate("/catalog");
   }
   const routeToVerify = () => {
-    navigate("/verify");
+    navigate("/verify", {replace: true});
   }
   return (
     <Page title="Create What-if Scenario">
