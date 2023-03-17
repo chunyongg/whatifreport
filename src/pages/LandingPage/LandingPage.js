@@ -7,12 +7,41 @@
 // Note: '1' must be a String, not Number
 // Once done, check https://docs.google.com/spreadsheets/d/11xAgg8_D9qaoKgkyHCbb88NgPFO0z3WqPhBT4Cw1H2A/edit?resourcekey#gid=114586490 to ensure your log is done
 // Try to make the style consistent with the rest of the What-if report
-import React from 'react'
+import React, {useState} from 'react'
+import styles from "./LandingPage.module.css";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
 
 function LandingPage() {
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    setValidated(true);
+  };
+
   return (
-    <div>LandingPage</div>
-  )
+    <div className={styles.container}>
+      <Form
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+        className={styles.form}
+      >
+        <Form.Label style={{float: "left"}}>
+          Please enter your Participant ID (as provided by Qualtrics)
+        </Form.Label>
+        <Form.Control required type="text" placeholder="Participant ID" />
+        <br/>
+        <Button type="submit" style={{width: "100%"}}>Submit form</Button>
+      </Form>
+    </div>
+  );
 }
 
 export default LandingPage
