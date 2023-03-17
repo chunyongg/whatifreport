@@ -22,9 +22,18 @@ const DEFAULT_DATA = {
   allModules,
 };
 
-
 const data = (state = DEFAULT_DATA, action) => {
   switch (action.type) {
+    case 'UPDATE_LIST':
+      return {
+        ...state,
+        allModules: [...action.modules]
+      }
+    case "UPDATE_CORRECT_MODULES":
+      return {
+        ...state,
+        correctModules: action.correctModules,
+      };
     default:
       return state;
   }

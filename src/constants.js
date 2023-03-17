@@ -18,13 +18,6 @@ export const allLevels = {
     ABSENT
 }
 
-// Manipulate this for different combinations
-export const IVs = {
-    IV1: ALPHABETICAL, //ALPHABETICAL, RELEVANCE OR SEARCH
-    IV2: ONE, // ONE OR MULTIPLE
-    IV3: ABSENT, //PRESENT OR ABSENT
-    TRIAL: 1, //1,2, OR 3
-}
 
 export const values = {
     [ALPHABETICAL]: 2,
@@ -36,7 +29,9 @@ export const values = {
     [ABSENT]: 4
 }
 
+
 export const getSuccessCode = () => {
+    const IVs = require("./logging").IVs;
     const IV1_VALUE = values[IVs.IV1];
     const IV2_VALUE = values[IVs.IV2];
     const IV3_VALUE = values[IVs.IV3];

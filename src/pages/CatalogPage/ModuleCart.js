@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from "./CatalogPage.module.css";
+import { connect } from "react-redux";
 
 function ModuleCart({modules}) {
   return (
@@ -14,4 +15,12 @@ function ModuleCart({modules}) {
   );
 }
 
-export default ModuleCart
+function mapStateToProps(state) {
+  const moduleCart = state.moduleCart;
+  return {
+    modules: moduleCart
+  };
+}
+
+
+export default connect(mapStateToProps)(ModuleCart);

@@ -13,10 +13,10 @@ import { removeModule } from "../../actions";
 function HomePage({moduleCart, removeModule}) {
   const navigate = useNavigate();
   const openCourseCatalog = () => {
-    navigate("/catalog");
+    navigate('/catalog');
   }
   const routeToVerify = () => {
-    navigate("/verify", {replace: true});
+    navigate('/verify', {replace: true, });
   }
   const [showPopup, setShowPopup] = useState(false);
   const [moduleToDelete, setModuleToDelete] = useState(null);
