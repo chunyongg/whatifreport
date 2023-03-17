@@ -12,6 +12,7 @@ function ModuleSubjects({
   unselectSubject,
   addModule
 }) {
+  // https://www.comp.nus.edu.sg/cugresource/per-cohort/cs/cs-19-20/
   function filteredSubjects() {
     switch (iv1) {
       case "Alphabet":
@@ -46,22 +47,7 @@ function ModuleSubjects({
               (mod) => mod.subject === "CS" || mod.subject === "NM"
             );
           default:
-            return moduleSubjects.filter(
-              (mod) =>
-                !(
-                  mod.subject === "CS" ||
-                  mod.subject === "CP" ||
-                  mod.subject === "TR" ||
-                  mod.subject === "MA" ||
-                  mod.subject === "CM" ||
-                  mod.subject === "LSM" ||
-                  mod.subject === "PC" ||
-                  mod.subject === "ST" ||
-                  mod.subject === "ES" ||
-                  mod.subject === "IS" ||
-                  mod.subject === "NM"
-                ) && !mod.subject.startsWith("GE")
-            );
+            return moduleSubjects;
         }
       case "Search":
         return moduleSubjects.filter((mod) =>
