@@ -10,6 +10,8 @@ function ModuleSubjects({
   selectSubject,
   unselectSubject,
   addModule,
+  addToCart,
+  removeFromCart
 }) {
   function filteredSubjects() {
     switch (iv1) {
@@ -82,6 +84,8 @@ function ModuleSubjects({
       selectSubject={selectSubject}
       unselectCode={unselectSubject}
       addModule={addModule}
+      addToCart={addToCart}
+      removeFromCart={removeFromCart}
     />
   ));
   return (

@@ -98,21 +98,21 @@
 }
 
 .filterBox {
-    font-family: Arial,sans-serif;
-    font-size: 9pt;
-    font-weight: normal;
-    font-style: normal;
-    border-width: 1px;
-    border-color: rgb(201,206,213);
-    border-style: solid;
-    width: 443px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 65px;
-    padding: 5px;
-    box-sizing: border-box;
+  font-family: Arial,sans-serif;
+  font-size: 9pt;
+  font-weight: normal;
+  font-style: normal;
+  border-width: 1px;
+  border-color: rgb(201,206,213);
+  border-style: solid;
+  width: 443px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 65px;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .filterRow {
@@ -136,82 +136,97 @@
 }
 
 .table {
-    width: 100%;
-    table-layout: fixed;
-    display: table;
-    border-collapse: collapse;
-    margin: 20px;
-    margin-top: 4px;
-  }
+  width: 100%;
+  table-layout: fixed;
+  display: table;
+  border-collapse: collapse;
+  margin: 20px;
+  margin-top: 4px;
+}
 
-  .th {
-    font-family: Verdana,Arial,sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    color: #4b6987;
-    background-color: #f9f9f9;
-    vertical-align: middle;
-    border-width: 1px;
-    border-color: rgb(230,230,230);
-    border-style: solid;
-    padding: 2px;
-  }
+.th {
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #4b6987;
+  background-color: #f9f9f9;
+  vertical-align: middle;
+  border-width: 1px;
+  border-color: rgb(230,230,230);
+  border-style: solid;
+  padding: 2px;
+}
 
-  .td {
-    color: #004b91;
-    font-family: Arial,sans-serif;
-    font-size: 15px;
-    font-weight: normal;
-    font-style: normal;
-    line-height: 100%;
-    vertical-align: middle;
-    border-width: 1px;
-    border-color: rgb(230,230,230);
-    border-style: solid;
-    padding: 8px 4px;
-  }
+.td {
+  color: #004b91;
+  font-family: Arial,sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 100%;
+  vertical-align: middle;
+  border-width: 1px;
+  border-color: rgb(230,230,230);
+  border-style: solid;
+  padding: 8px 4px;
+}
 
-  .td:hover {
-    text-decoration: underline;
-    text-decoration-color: #b26a2f;
-    color: #b26a2f;
-    cursor: pointer;
-  }
+.td:hover {
+  text-decoration: underline;
+  text-decoration-color: #b26a2f;
+  color: #b26a2f;
+  cursor: pointer;
+}
 
-  .select {
-    font-size: 15px;
-  }
+.select {
+  font-size: 15px;
+}
 
-  .firstCol {
-    text-align: center;
-  }
+.firstCol {
+  text-align: center;
+}
 
-  .first {
-    background-color: #f0ecec;
-  }
+.first {
+  background-color: #f0ecec;
+}
 
-  .odd {
-    background-color: #fff;
-  }
+.odd {
+  background-color: #fff;
+}
 
-  .even {
-    background-color: #f9f8f9;
-  }
+.even {
+  background-color: #f9f8f9;
+}
 
-  .searchBox {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 10px 20px;
-  }
+.searchBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 20px;
+}
 
-  .inputArea {
-    width: 100%;
-    margin-left: 10px;
-    border: none;
-  }
+.inputArea {
+  width: 100%;
+  margin-left: 10px;
+  border: none;
+}
 
-  textarea:focus, input:focus {
-    outline: none;
-  }
+textarea:focus, input:focus {
+  outline: none;
+}
+
+.moduleCart {
+  position: sticky;
+  bottom: 0;
+  width: 580px;
+  height: 80px;
+  box-sizing: border-box;
+  background: #F9F9F9;
+  border: 2px solid #CDD1D7;
+  border-radius: 10px 10px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 30px;
+}

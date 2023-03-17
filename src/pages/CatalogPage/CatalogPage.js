@@ -9,10 +9,12 @@ import Header from "./Header";
 import FilterBox from "./FilterBox";
 import UtilityButtons from "./UtilityButtons";
 import ModuleSubjects from "./ModuleSubjects";
+import ModuleCart from "./ModuleCart";
 
-function CatalogPage({ addModule, data, iv1 }) {
+function CatalogPage({ addModule, data, iv1, iv2, iv3 }) {
   const [currentFilter, setFilter] = useState("A");
   const [selectedModuleSubjects, addSubject] = useState([]);
+  const [modulesInCart, setModuleCart] = useState([]);
   const { moduleSubjects, allModules } = data;
 
   /* Select */
@@ -43,6 +45,16 @@ function CatalogPage({ addModule, data, iv1 }) {
     }
   };
 
+  /* Add to module cart */
+  const addToCart = (module) => {
+    setModuleCart((prev) => [...prev, module]);
+  }
+
+  /* Remove from module cart */
+  const removeFromCart = (module) => {
+    setModuleCart((prev) => prev.filter((subj) => subj !== module));
+  }
+
   /* Navigate back to home page */
   const navigate = useNavigate();
   const navigateBack = () => navigate(-1);
@@ -70,6 +82,8 @@ function CatalogPage({ addModule, data, iv1 }) {
           unselectSubject={unselectSubject}
           moduleSubjects={moduleSubjects}
           addModule={addModule}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
         />
         <UtilityButtons
           collapse={collapse}
@@ -79,6 +93,7 @@ function CatalogPage({ addModule, data, iv1 }) {
         <div style={{ height: "10px" }} />
         <hr />
         <div style={{ height: "30px" }} />
+        {iv3 && <ModuleCart modules={modulesInCart} />}
       </div>
     </Page>
   );
