@@ -132,7 +132,7 @@ function FilterBoxBySearch({ callback }) {
   useEffect(() => {
     const timeOutId = setTimeout(() => callback(query), 500);
     return () => clearTimeout(timeOutId);
-  }, [query]);
+  });
 
   return (
     <div className={styles.filterBox}>
