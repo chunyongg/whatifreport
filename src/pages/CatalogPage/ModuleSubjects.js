@@ -18,10 +18,10 @@ function ModuleSubjects({
   currentFilter,
   addModule,
   updateModuleList,
-  data,
+  moduleSubjects,
+  modules,
 }) {
   const [selectedModuleSubjects, addSubject] = useState([]);
-  const { moduleSubjects, allModules: modules } = data;
   /* Select */
   const selectSubject = (subj) => {
     addSubject((prev) => [...prev, subj]);
@@ -32,7 +32,7 @@ function ModuleSubjects({
   };
   /* Expand all accordions */
   const expand = () => {
-    const mapped = moduleSubjects.map((mod) => mod.subject);
+    const mapped = moduleSubjectsLocal.map((mod) => mod.subject);
     addSubject(mapped);
   };
 
@@ -40,16 +40,21 @@ function ModuleSubjects({
     ...moduleSubjects,
   ]);
   useEffect(() => {
+    if (iv1 === "Search" && moduleSubjectsLocal.length < 10 && modules.length < 10) {
+      expand();
+    }
+  }, [moduleSubjectsLocal])
+  useEffect(() => {
     const updated = filterSubjects();
     updateModuleSubjects(updated);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentFilter,]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentFilter]);
 
   function filterSubjects() {
     switch (iv1) {
       case "Alphabet":
         restoreAllModulesList();
-        // updateModuleList(allModules);
+        updateModuleList(allModules);
         return moduleSubjects.filter((mod) =>
           mod.subject.startsWith(currentFilter)
         );
@@ -96,18 +101,19 @@ function ModuleSubjects({
         const index = currentFilter.indexOf(firstDigit);
         let code = currentFilter;
         restoreAllModulesList();
+        updateModuleList(allModules);
         filterAllModulesListBySearch(currentFilter);
         updateModuleList(allModules);
         if (index > -1) {
           code = currentFilter.substring(0, index);
-          updateModuleList(allModules);
           return moduleSubjects.filter((subj) => {
             const subject = subj.subject;
-            const available = allModules.find((mod) => mod.subject === subject);
+            const available = allModules.find(
+              (mod) => mod.subject === subject.toUpperCase()
+            );
             return available !== undefined;
-          })
-        }
-        else if (code.length <= 3) {
+          });
+        } else if (code.length <= 3) {
           return moduleSubjects.filter((mod) =>
             mod.subject.startsWith(code.toUpperCase())
           );
@@ -116,7 +122,7 @@ function ModuleSubjects({
             const subject = subj.subject;
             const available = allModules.find((mod) => mod.subject === subject);
             return available !== undefined;
-          })
+          });
         }
       default:
         return moduleSubjects.filter((mod) =>
@@ -165,7 +171,8 @@ function ModuleSubjects({
 function mapStateToProps(state) {
   const data = state.data;
   return {
-    data,
+    moduleSubjects: data.moduleSubjects,
+    modules: data.allModules,
   };
 }
 

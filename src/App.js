@@ -14,6 +14,8 @@ import loggingjs from './logging';
 const store = createStore(rootReducer)
 
 function App() {
+  // TODO: Link the query params to the correct IV level
+  // TODO: If the query params do not belong to any condition number or the trial task is not a value from 1-3, do not allow the user to proceed (show "Invalid Link")
   const [searchParams] = useSearchParams();
   const a = searchParams.get('a');
   const b = searchParams.get('b');

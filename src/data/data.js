@@ -3,20 +3,22 @@ const { ALPHABETICAL, RELEVANCE, SEARCH, ONE, MULTIPLE, PRESENT, ABSENT } =
 
 // TODO: Populate with all conditons
 // 12 keys, representing conditions 1 - 12
+// Refer to https://docs.google.com/spreadsheets/d/1iSVlKy0-vKKXRyoGoiFfc9a1voMqbaZc/edit#gid=2133923558 under "Success Codes" sheet
+// For the condition values, e.g. condition 1 has a value of 4
 export const IVConditions = {
-  1: {
+  4: {
     IV1: ALPHABETICAL, //ALPHABETICAL, RELEVANCE OR SEARCH
     IV2: ONE, // ONE OR MULTIPLE
     IV3: ABSENT, //PRESENT OR ABSENT,
     TRIAL: "",
   },
-  2: {
+  12: {
     IV1: ALPHABETICAL, //ALPHABETICAL, RELEVANCE OR SEARCH
     IV2: MULTIPLE, // ONE OR MULTIPLE
     IV3: ABSENT, //PRESENT OR ABSENT
     TRIAL: "",
   },
-  3: {
+  16: {
     IV1: ALPHABETICAL, //ALPHABETICAL, RELEVANCE OR SEARCH
     IV2: ONE, // ONE OR MULTIPLE
     IV3: ABSENT, //PRESENT OR ABSENT
@@ -26,10 +28,10 @@ export const IVConditions = {
 
 // TODO: Populate with all conditions and trial tasks
 // 36 keys, representing conditions 1-12 with each condition having 3 keys
-// Example: 11 denotes trial task 1 of condition 1
-// Note the keys are '11' (string), NOT 11 (integer)
+// Example: In condition 1, value is 4. 41 denotes trial task 1 of condition whose value is 4
+// Note the keys are '41' (string), NOT 41 (integer)
 const correctModuleCodes = {
-  11: [
+  41: [
     {
       subject: "CS",
       code: "4249",
@@ -43,7 +45,7 @@ const correctModuleCodes = {
       code: "1070",
     },
   ],
-  12: [
+  42: [
     {
       subject: "CS",
       code: "3230",
@@ -57,7 +59,7 @@ const correctModuleCodes = {
       code: "1071",
     },
   ],
-  13: [
+  43: [
     {
       subject: "CS",
       code: "2030",
@@ -38210,7 +38212,7 @@ export const filterAllModulesListBySearch = (searched) => {
     }
   }
   allModules = allModulesBackedUp.filter((mod) => {
-    return mod.courseName.startsWith(searched);
+    return mod.courseName.startsWith(searched) || mod.subject.startsWith(searched);
   });
 };
 
