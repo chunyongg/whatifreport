@@ -17,7 +17,7 @@ function HomePage({moduleCart, removeModule}) {
     navigate("/catalog");
   }
   const routeToVerify = () => {
-    navigate("/verify");
+    navigate("/verify", {replace: true});
   }
   const [showPopup, setShowPopup] = useState(false);
   const [moduleToDelete, setModuleToDelete] = useState(null);

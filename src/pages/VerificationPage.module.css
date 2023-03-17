@@ -1,0 +1,21 @@
+.red {
+    color: red;
+}
+
+.container {
+    margin-top: 20vh;
+}
+
+.green {
+    color: green;
+}
+
+.button {
+    margin: auto;
+    width: 150px;
+    height: 50px;
+}
+
+.big {
+    font-size: 2em;
+}

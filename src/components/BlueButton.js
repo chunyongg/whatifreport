@@ -3,7 +3,7 @@ import styles from "./BlueButton.module.css";
 
 function BlueButton(props) {
   return (
-    <button className={styles.button} onClick={props.onClick}>
+    <button className={`${props.className} ${styles.button}`} onClick={props.onClick}>
       {props.children}
     </button>
   );

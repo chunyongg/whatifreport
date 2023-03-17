@@ -1,9 +1,10 @@
 // Adapted from http://web.mit.edu/6.813/www/sp18/assignments/as1-implementation/logging.js
 // A simple Google-spreadsheet-based event logging framework.
+const { IVs } = require("./constants");
 
-var FILTERNG_TECHNIQUE = 'Alphabetical';
-var NUMBER_OF_MODULES_SELECTED = 'Single';
-var PRESENCE_OF_MODULE_CART_IN_CATALOG = 'False';
+var FILTERNG_TECHNIQUE = IVs.IV1;
+var NUMBER_OF_MODULES_SELECTED = IVs.IV2;
+var PRESENCE_OF_MODULE_CART_IN_CATALOG = IVs.IV3;
 var PARTICIPANT_ID = '';
 
 function initialize(participantId) {
