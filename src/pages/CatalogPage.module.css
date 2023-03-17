@@ -1,6 +1,6 @@
 .primaryText {
-    width: 100vw;
-    font-size: 16pt;
+    font-family: Arial;
+    font-size: 11pt;
     font-weight: normal;
     font-style: normal;
     color: rgb(68,101,144);
@@ -8,25 +8,27 @@
     border-bottom-width: 1px;
     border-bottom-color: rgb(187,187,187);
     border-bottom-style: solid;
-    margin: 0;
-    padding: 8px 0px;
-    text-align: start;
+    width: 100%;
+    display: inline-block;
 }
 
 .selectedFilterText {
-  font-size: 13pt;
-  padding: 0px 4px;
   color: #1010ef;
   text-decoration: underline;
   text-decoration-color: #1010ef;
+
+  font-size: 9pt;
+  padding: 0px 4px;
   cursor: pointer;
+  margin-bottom: 4px;
 }
 
 .filterText {
-    font-size: 13pt;
-    padding: 0px 4px;
-    color: rgb(68,101,144);
-    cursor: pointer;
+  color: rgb(68,101,144);
+  font-size: 9pt;
+  padding: 0px 4px;
+  cursor: pointer;
+  margin-bottom: 4px;
 }
 
 .filterText:hover {
@@ -42,7 +44,13 @@
 }
 
 .moduleList {
-    margin: 20px;
+    font-family: Arial;
+    font-size: 9pt;
+    font-weight: normal;
+    font-style: normal;
+    color: rgb(81,81,81);
+    margin-top: 15px;
+    margin-left: 42px;
 }
 
 .row {
@@ -67,12 +75,12 @@
 }
 
 .nameText {
-    font-family: Arial;
-    font-size: 15pt;
-    font-weight: normal;
-    font-style: normal;
-    color: rgb(81,81,81);
-    text-align: start;
+  font-family: Arial;
+  font-size: 11pt;
+  font-weight: normal;
+  font-style: normal;
+  color: rgb(81,81,81);
+  margin-top: 5px;
 }
 
 .moduleBox {
@@ -82,38 +90,49 @@
     margin: 20px;
 }
 
+.mappedBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .filterBox {
-    width: 100%;
-    border: 1px solid rgb(81,81,81);
-    padding: 50px;
-    margin: 20px;
+    font-family: Arial,sans-serif;
+    font-size: 9pt;
+    font-weight: normal;
+    font-style: normal;
+    border-width: 1px;
+    border-color: rgb(201,206,213);
+    border-style: solid;
+    width: 443px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 65px;
+    padding-bottom: 5px;
+    box-sizing: border-box;
 }
 
 .filterRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 30px;
+  margin-left: 120px;
 }
 
 
 .collapse {
-  font-size: 15px !important;
-  width: 175px;
-  height: 25px !important;
+  width: 150px !important;
   margin-right: 16px !important;
 }
 
 .expand {
-  font-size: 15px !important;
-  width: 175px;
-  height: 25px !important;
+  width: 130px !important;
   margin-right: 16px !important;
 }
 
 .cancel {
-  font-size: 15px !important;
-  width: 115px;
-  height: 25px !important;
+  width: 90px !important;
 }
 
 .table {

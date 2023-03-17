@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from "react-bootstrap/Modal";
-import LongYellowButton from "./LongYellowButton";
+import ShortYellowButton from "./ShortYellowButton";
 import styles from "./Popup.module.css";
 
 function Popup(props) {
@@ -15,16 +15,16 @@ function Popup(props) {
     >
       <div className={styles.container}>
         <div className={styles.title}>Delete Confirmation</div>
-        <hr className={styles.divider}/>
+        <hr className={styles.divider} />
         <div className={styles.text}>
           Delete current/selected rows from this page? The delete will occur
           when the transaction is saved.
         </div>
         <div>
           &ensp;
-          <LongYellowButton onClick={props.deleteModule}>OK</LongYellowButton>
+          <ShortYellowButton onClick={props.deleteModule}>OK</ShortYellowButton>
           &nbsp;
-          <LongYellowButton onClick={props.onHide}>Cancel</LongYellowButton>
+          <ShortYellowButton onClick={props.onHide}>Cancel</ShortYellowButton>
         </div>
       </div>
     </Modal>

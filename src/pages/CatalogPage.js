@@ -7,16 +7,35 @@ import ShortYellowButton from "../components/ShortYellowButton";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { addModule } from "../actions";
+
 function Header() {
   return (
     <>
-      <p className={styles.nameText}>CHUN YONG LIM</p>
+      <p className={styles.nameText}>JOHN DOE</p>
+      <div style={{ height: "40px" }} />
       <p className={styles.primaryText}>What-If Report</p>
+      <div style={{ height: "63px" }} />
     </>
   );
 }
 
-function FilterArea({ callback, currentFilter, collapse, expand }) {
+function UtilityButtons({collapse, expand, navigateBack}) {
+  return (
+    <div className={styles.filterRow}>
+      <ShortYellowButton className={styles.collapse} onClick={collapse}>
+        Collapse All
+      </ShortYellowButton>
+      <ShortYellowButton className={styles.expand} onClick={expand}>
+        Expand All
+      </ShortYellowButton>
+      <ShortYellowButton className={styles.cancel} onClick={navigateBack}>
+        Cancel
+      </ShortYellowButton>
+    </div>
+  );
+}
+
+function FilterArea({ callback, currentFilter, collapse, expand, navigateBack }) {
   const letters = [
     "A",
     "B",
@@ -47,7 +66,7 @@ function FilterArea({ callback, currentFilter, collapse, expand }) {
   ];
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const mapped = letters.map((letter, i) => (
-    <td
+    <div
       key={i}
       className={
         letter === currentFilter ? styles.selectedFilterText : styles.filterText
@@ -55,42 +74,35 @@ function FilterArea({ callback, currentFilter, collapse, expand }) {
       onClick={() => callback(letter)}
     >
       {letter}
-    </td>
+    </div>
   ));
   const mappedNumbers = numbers.map((number, i) => (
-    <td
+    <div
       key={i}
       className={
         number === currentFilter ? styles.selectedFilterText : styles.filterText
       }
       onClick={() => callback(number)}
+      style={{ marginLeft: "2px" }}
     >
       {number}
-    </td>
+    </div>
   ));
-  const navigate = useNavigate();
-  const navigateBack = () => navigate(-1);
   return (
     <>
       <div className={styles.filterBox}>
-        <table>
-          <tbody>
-            <tr>{mapped}</tr>
-            <tr>{mappedNumbers}</tr>
-          </tbody>
-        </table>
+        <div className={styles.mappedBox} style={{ marginLeft: "15px" }}>
+          {mapped}
+        </div>
+        <div className={styles.mappedBox} style={{ marginLeft: "230px" }}>
+          {mappedNumbers}
+        </div>
       </div>
-      <div className={styles.filterRow}>
-        <ShortYellowButton className={styles.collapse} onClick={collapse}>
-          <span className={styles.filterButtonText}>Collapse All</span>
-        </ShortYellowButton>
-        <ShortYellowButton className={styles.expand} onClick={expand}>
-          Expand All
-        </ShortYellowButton>
-        <ShortYellowButton className={styles.cancel} onClick={navigateBack}>
-          Cancel
-        </ShortYellowButton>
-      </div>
+      <UtilityButtons
+        collapse={collapse}
+        expand={expand}
+        navigateBack={navigateBack}
+      />
     </>
   );
 }
@@ -246,6 +258,9 @@ function CatalogPage({ addModule, data }) {
       addSubject((prev) => [...prev, subject]);
     }
   };
+  const navigate = useNavigate();
+  const navigateBack = () => navigate(-1);
+
   return (
     <Page>
       <div className={styles.container}>
@@ -255,6 +270,7 @@ function CatalogPage({ addModule, data }) {
           currentFilter={currentFilter}
           collapse={collapse}
           expand={expand}
+          navigateBack={navigateBack}
         />
         <ModuleSubjects
           modules={allModules}
@@ -264,6 +280,11 @@ function CatalogPage({ addModule, data }) {
           unselectSubject={unselectSubject}
           moduleSubjects={moduleSubjects}
           addModule={addModule}
+        />
+        <UtilityButtons
+          collapse={collapse}
+          expand={expand}
+          navigateBack={navigateBack}
         />
       </div>
     </Page>
