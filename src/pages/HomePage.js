@@ -211,14 +211,14 @@ function HomePage({moduleCart, removeModule}) {
             )}
           </tbody>
         </table>
-        <div style={{ height: "35px" }} />
-        <div className="align-right">
-          <GreenButton onClick={routeToVerify}>
-            Generate What-If Report
-          </GreenButton>
-          &emsp;&nbsp;
-        </div>
       </div>
+      <div style={{ height: "35px" }} />
+      <div className="align-right">
+        <GreenButton onClick={routeToVerify}>
+          Generate What-If Report
+        </GreenButton>
+      </div>
+      <div style={{ height: "30px" }} />
     </Page>
   );
 }

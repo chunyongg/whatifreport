@@ -286,6 +286,9 @@ function CatalogPage({ addModule, data }) {
           expand={expand}
           navigateBack={navigateBack}
         />
+        <div style={{ height: "10px" }} />
+        <hr />
+        <div style={{ height: "30px" }} />
       </div>
     </Page>
   );
