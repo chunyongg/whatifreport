@@ -8,7 +8,7 @@ function ModuleCart({modules}) {
       {modules.length === 0 ? (
         <span>(None)</span>
       ) : (
-        modules.map((mod, i) => <span key={i}>{i > 0 && ", "}{mod}</span>)
+        modules.map((mod, i) => <span key={i}>{i > 0 && ", "}{mod.subject}{mod.code}</span>)
       )}
     </div>
   );

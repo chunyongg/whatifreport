@@ -229,4 +229,6 @@ textarea:focus, input:focus {
   align-items: center;
   justify-content: flex-start;
   padding: 0 30px;
+  overflow-y: auto;
+  word-wrap: normal;
 }

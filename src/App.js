@@ -17,7 +17,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/catalog" element={<CatalogPage iv1="Search" iv2={1} iv3={true} trialNum={1} />} />
+          <Route path="/catalog" element={<CatalogPage iv1="Search" iv2={true} iv3={true} trialNum={1} />} />
           <Route path="/verify" element={<VerificationPage />} />
         </Routes>
       </div>

@@ -11,10 +11,9 @@ import UtilityButtons from "./UtilityButtons";
 import ModuleSubjects from "./ModuleSubjects";
 import ModuleCart from "./ModuleCart";
 
-function CatalogPage({ addModule, data, iv1, iv2, iv3 }) {
+function CatalogPage({ moduleCart, addModule, data, iv1, iv2, iv3 }) {
   const [currentFilter, setFilter] = useState("A");
   const [selectedModuleSubjects, addSubject] = useState([]);
-  const [modulesInCart, setModuleCart] = useState([]);
   const { moduleSubjects, allModules } = data;
 
   /* Select */
@@ -45,16 +44,6 @@ function CatalogPage({ addModule, data, iv1, iv2, iv3 }) {
     }
   };
 
-  /* Add to module cart */
-  const addToCart = (module) => {
-    setModuleCart((prev) => [...prev, module]);
-  }
-
-  /* Remove from module cart */
-  const removeFromCart = (module) => {
-    setModuleCart((prev) => prev.filter((subj) => subj !== module));
-  }
-
   /* Navigate back to home page */
   const navigate = useNavigate();
   const navigateBack = () => navigate(-1);
@@ -75,6 +64,7 @@ function CatalogPage({ addModule, data, iv1, iv2, iv3 }) {
         />
         <ModuleSubjects
           iv1={iv1}
+          iv2={iv2}
           modules={allModules}
           currentFilter={currentFilter}
           selected={selectedModuleSubjects}
@@ -82,8 +72,6 @@ function CatalogPage({ addModule, data, iv1, iv2, iv3 }) {
           unselectSubject={unselectSubject}
           moduleSubjects={moduleSubjects}
           addModule={addModule}
-          addToCart={addToCart}
-          removeFromCart={removeFromCart}
         />
         <UtilityButtons
           collapse={collapse}
@@ -93,16 +81,18 @@ function CatalogPage({ addModule, data, iv1, iv2, iv3 }) {
         <div style={{ height: "10px" }} />
         <hr />
         <div style={{ height: "30px" }} />
-        {iv3 && <ModuleCart modules={modulesInCart} />}
+        {iv3 && <ModuleCart modules={moduleCart} />}
       </div>
     </Page>
   );
 }
 
 function mapStateToProps(state) {
+  const moduleCart = state.moduleCart;
   const data = state.data;
   return {
     data,
+    moduleCart
   };
 }
 

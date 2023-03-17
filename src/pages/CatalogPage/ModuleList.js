@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./CatalogPage.module.css";
 import ShortYellowButton from "../../components/ShortYellowButton";
 
-function ModuleList({ subject, modules, addModule, addToCart, removeFromCart }) {
+function ModuleList({ modules, addModule, iv2 }) {
   const navigate = useNavigate();
   if (modules.length === 0) {
     return (
@@ -30,8 +30,9 @@ function ModuleList({ subject, modules, addModule, addToCart, removeFromCart }) 
         <ShortYellowButton
           onClick={() => {
             addModule(mod);
-            addToCart(subject + mod.code);
-            navigate(-1);
+            if (!iv2) {
+              navigate(-1);
+            }
           }}
         >
           Select

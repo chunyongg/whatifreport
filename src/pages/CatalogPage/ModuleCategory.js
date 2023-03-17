@@ -4,15 +4,14 @@ import openTriangle from "../../assets/triangle-expanded.jpg";
 import triangle from "../../assets/triangle.jpg";
 
 function ModuleCategory({
+  iv2,
   allModules,
   subject,
   name,
   selected,
   selectSubject,
   unselectSubject,
-  addModule,
-  addToCart,
-  removeFromCart
+  addModule
 }) {
   const isSelected = selected.includes(subject);
   const filteredModules = allModules.filter((mod) => mod.subject === subject);
@@ -39,11 +38,9 @@ function ModuleCategory({
       </div>
       {isSelected && (
         <ModuleList
-          subject={subject}
+          iv2={iv2}
           modules={filteredModules}
           addModule={addModule}
-          addToCart={addToCart}
-          removeFromCart={removeFromCart}
         />
       )}
     </>

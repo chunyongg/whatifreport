@@ -3,15 +3,14 @@ import ModuleCategory from "./ModuleCategory";
 
 function ModuleSubjects({
   iv1,
+  iv2,
   modules,
   moduleSubjects,
   currentFilter,
   selected,
   selectSubject,
   unselectSubject,
-  addModule,
-  addToCart,
-  removeFromCart
+  addModule
 }) {
   function filteredSubjects() {
     switch (iv1) {
@@ -76,6 +75,7 @@ function ModuleSubjects({
   }
   const modulesMapped = filteredSubjects().map((mod, i) => (
     <ModuleCategory
+      iv2={iv2}
       allModules={modules}
       subject={mod.subject}
       name={mod.name}
@@ -84,8 +84,6 @@ function ModuleSubjects({
       selectSubject={selectSubject}
       unselectCode={unselectSubject}
       addModule={addModule}
-      addToCart={addToCart}
-      removeFromCart={removeFromCart}
     />
   ));
   return (
