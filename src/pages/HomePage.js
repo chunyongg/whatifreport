@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Page from '../components/Page';
 import styles from "./HomePage.module.css";
 import BlueButton from '../components/BlueButton';
 import GreenButton from '../components/GreenButton';
 import ShortGreenButton from '../components/ShortGreenButton';
+import Popup from "../components/Popup";
+
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { removeModule } from "../actions";
+
 function HomePage({moduleCart, removeModule}) {
   const navigate = useNavigate();
   const openCourseCatalog = () => {
@@ -15,11 +18,34 @@ function HomePage({moduleCart, removeModule}) {
   const routeToVerify = () => {
     navigate("/verify");
   }
+  const [showPopup, setShowPopup] = useState(false);
+  const [moduleToDelete, setModuleToDelete] = useState(null);
+  const handleDeleteModule = (module) => {
+    setShowPopup(true);
+    setModuleToDelete(module);
+  }
+  const deleteModule = () => {
+    removeModule(moduleToDelete);
+    setShowPopup(false);
+  }
   return (
     <Page title="Create What-if Scenario">
+      <Popup
+        show={showPopup}
+        onHide={() => setShowPopup(false)}
+        deleteModule={deleteModule}
+      />
       <div className={styles.p}>
         <h1 className={styles.h1}>Create What-if Scenario</h1>
-        <h4 className={styles.h4} style={{ margin: "20px 0px", color: "#000", fontFamily: "Arial", fontSize: "13px" }}>
+        <h4
+          className={styles.h4}
+          style={{
+            margin: "20px 0px",
+            color: "#000",
+            fontFamily: "Arial",
+            fontSize: "13px",
+          }}
+        >
           You may be thinking of changing your program of study or taking
           certain courses. Using this page, you can set up a what-if scenario
           based on different academic programs or courses. Select the Submit
@@ -61,28 +87,28 @@ function HomePage({moduleCart, removeModule}) {
       <div className={styles.p}>
         <h2 className={styles.h2}>Program Scenario</h2>
         <table className={styles.table}>
-         <tbody>
-         <tr className={styles.trcol}>
-            <td className={styles.td1}>Program: Bachelor of Computing</td>
-            <td className={styles.td2}></td>
-            <td className={styles.td3}>NUS | Undergraduate</td>
-            <td className={styles.td4}>
-              Degree: BComp (Computer Science)
-              <br />
-              &emsp;&emsp;Honors: Computer Science (Hons)
-              <br />
-              Minor: Interactive Media Dev (Minor)
-            </td>
-          </tr>
-         </tbody>
+          <tbody>
+            <tr className={styles.trcol}>
+              <td className={styles.td1}>Program: Bachelor of Computing</td>
+              <td className={styles.td2}></td>
+              <td className={styles.td3}>NUS | Undergraduate</td>
+              <td className={styles.td4}>
+                Degree: BComp (Computer Science)
+                <br />
+                &emsp;&emsp;Honors: Computer Science (Hons)
+                <br />
+                Minor: Interactive Media Dev (Minor)
+              </td>
+            </tr>
+          </tbody>
         </table>
         <div style={{ height: "10px" }} />
       </div>
       <div className={styles.p}>
         <h2 className={styles.h2}>Course Scenario</h2>
         <h4 className={styles.h4} style={{ margin: "20px 8px" }}>
-          Select the "browse course catalog" button and then select
-          courses for inclusion in your course what-if  scenario.
+          Select the "browse course catalog" button and then select courses for
+          inclusion in your course what-if scenario.
         </h4>
         <ShortGreenButton onClick={openCourseCatalog}>
           browse course catalog
@@ -145,7 +171,12 @@ function HomePage({moduleCart, removeModule}) {
                 </td>
                 <td className={styles.td}></td>
                 <td className={styles.td} style={{ textAlign: "center" }}>
-                  <button className={styles.removebutton} onClick={() => removeModule(module)}>—</button>
+                  <button
+                    className={styles.removebutton}
+                    onClick={() => handleDeleteModule(module)}
+                  >
+                    —
+                  </button>
                 </td>
               </tr>
             ))}
@@ -154,7 +185,10 @@ function HomePage({moduleCart, removeModule}) {
         <br />
         <br />
         <div className="align-right">
-          <GreenButton onClick={routeToVerify}>Generate What-If Report</GreenButton>&emsp;&nbsp;
+          <GreenButton onClick={routeToVerify}>
+            Generate What-If Report
+          </GreenButton>
+          &emsp;&nbsp;
         </div>
       </div>
     </Page>
