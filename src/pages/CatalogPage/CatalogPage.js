@@ -10,7 +10,7 @@ import FilterBox from "./FilterBox";
 import ModuleSubjects from "./ModuleSubjects";
 import ModuleCart from "./ModuleCart";
 
-function CatalogPage({ addModule, data, iv1, iv2, iv3 }) {
+function CatalogPage({ addModule, iv1, iv2, iv3 }) {
   const [currentFilter, setFilter] = useState("A");
 
   /* Set filter */

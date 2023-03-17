@@ -15,7 +15,7 @@ const store = createStore(rootReducer)
 
 function App() {
   // TODO: Link the query params to the correct IV level
-  // TODO: If the query params do not belong to any condition number or the trial task is not a value from 1-3, do not allow the user to proceed (show "Invalid Link")
+  // TODO: If the query params do not belong to any condition number or the trial task is not a value from 1-3 inclusive, do not allow the user to proceed (show "Invalid Link")
   const [searchParams] = useSearchParams();
   const a = searchParams.get('a');
   const b = searchParams.get('b');
@@ -33,7 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/catalog" element={<CatalogPage iv1="Search" iv2={true} iv3={true} trialNum={1} />} />
+          <Route path="/catalog" element={<CatalogPage iv1="Alphabet" iv2={true} iv3={true} trialNum={1} />} />
           <Route path="/verify" element={<VerificationPage />} />
         </Routes>
       </div>
