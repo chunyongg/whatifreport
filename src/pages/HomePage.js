@@ -9,6 +9,7 @@ import Popup from "../components/Popup";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { removeModule } from "../actions";
+import { editableInputTypes } from '@testing-library/user-event/dist/utils';
 
 function HomePage({moduleCart, removeModule}) {
   const navigate = useNavigate();
@@ -37,22 +38,14 @@ function HomePage({moduleCart, removeModule}) {
       />
       <div className={styles.p}>
         <h1 className={styles.h1}>Create What-if Scenario</h1>
-        <h4
-          className={styles.h4}
-          style={{
-            margin: "20px 0px",
-            color: "#000",
-            fontFamily: "Arial",
-            fontSize: "13px",
-          }}
-        >
+        <h4 className={styles.h4}>
           You may be thinking of changing your program of study or taking
           certain courses. Using this page, you can set up a what-if scenario
           based on different academic programs or courses. Select the Submit
           Request button to request a degree progress report based on your
           what-if information.
         </h4>
-        <div style={{ height: "3px" }} />
+        <div style={{ height: "10px" }} />
         <div className="align-right">
           <BlueButton>Return To Report Selection</BlueButton>
         </div>
@@ -62,7 +55,7 @@ function HomePage({moduleCart, removeModule}) {
         <h4 className={styles.h4}>
           &ensp;Select a career for which you want the change to take place.
         </h4>
-        <br />
+        <div style={{ height: "30px" }} />
         <table className={styles.table}>
           <thead>
             <tr>
@@ -79,11 +72,12 @@ function HomePage({moduleCart, removeModule}) {
             </tr>
           </tbody>
         </table>
-        <br />
+        <div style={{ height: "27px" }} />
         <div className="align-right">
           <GreenButton>Submit Request</GreenButton>
         </div>
       </div>
+      <div style={{ height: "10px" }} />
       <div className={styles.p}>
         <h2 className={styles.h2}>Program Scenario</h2>
         <table className={styles.table}>
@@ -104,11 +98,14 @@ function HomePage({moduleCart, removeModule}) {
         </table>
         <div style={{ height: "10px" }} />
       </div>
+      <div style={{ height: "23px" }} />
       <div className={styles.p}>
         <h2 className={styles.h2}>Course Scenario</h2>
-        <h4 className={styles.h4} style={{ margin: "20px 8px" }}>
+        <h4 className={styles.h4} style={{ margin: "17px 8px" }}>
           Select the "browse course catalog" button and then select courses for
-          inclusion in your course what-if scenario.
+          inclusion in your course what-if
+          <br />
+          scenario.
         </h4>
         <ShortGreenButton onClick={openCourseCatalog}>
           browse course catalog
@@ -149,28 +146,28 @@ function HomePage({moduleCart, removeModule}) {
             </tr>
           </thead>
           <tbody>
-            {moduleCart.map((module, index) => (
-              <tr key={index}>
+            {moduleCart.length === 0 ? (
+              <tr key={-1}>
                 <td className={styles.td}>
-                  <div className="align-right">{index + 1}</div>
+                  <div className="align-right">{1}</div>
                 </td>
-                <td className={styles.td}>2220</td>
-                <td className={styles.td}>{module.subject}</td>
-                <td className={styles.td}>{module.code}</td>
-                <td className={styles.td}>{module.courseName}</td>
-                <td className={styles.td}>GRD</td>
-                <td className={styles.td}>
+                <td className={styles.tdempty}></td>
+                <td className={styles.tdempty}></td>
+                <td className={styles.tdempty}></td>
+                <td className={styles.tdempty}></td>
+                <td className={styles.tdempty}></td>
+                <td className={styles.tdempty}>
                   <input type="checkbox" />
                 </td>
-                <td className={styles.td}>
+                <td className={styles.tdempty}>
                   <input className={styles.textinput} />
                   &nbsp;🔍
                 </td>
-                <td className={styles.td}>
-                  <div className="align-right">4.00</div>
+                <td className={styles.tdempty}>
+                  <div className="align-right">0.00</div>
                 </td>
-                <td className={styles.td}></td>
-                <td className={styles.td} style={{ textAlign: "center" }}>
+                <td className={styles.tdempty}></td>
+                <td className={styles.tdempty} style={{ textAlign: "center" }}>
                   <button
                     className={styles.removebutton}
                     onClick={() => handleDeleteModule(module)}
@@ -179,11 +176,42 @@ function HomePage({moduleCart, removeModule}) {
                   </button>
                 </td>
               </tr>
-            ))}
+            ) : (
+              moduleCart.map((module, index) => (
+                <tr key={index} role="button" className={styles.tr}>
+                  <td className={styles.td}>
+                    <div className="align-right">{index + 1}</div>
+                  </td>
+                  <td className={styles.td}>2220</td>
+                  <td className={styles.td}>{module.subject}</td>
+                  <td className={styles.td}>{module.code}</td>
+                  <td className={styles.td}>{module.courseName}</td>
+                  <td className={styles.td}>GRD</td>
+                  <td className={styles.td}>
+                    <input type="checkbox" />
+                  </td>
+                  <td className={styles.td}>
+                    <input className={styles.textinput} />
+                    &nbsp;🔍
+                  </td>
+                  <td className={styles.td}>
+                    <div className="align-right">4.00</div>
+                  </td>
+                  <td className={styles.td}></td>
+                  <td className={styles.td} style={{ textAlign: "center" }}>
+                    <button
+                      className={styles.removebutton}
+                      onClick={() => handleDeleteModule(module)}
+                    >
+                      —
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
-        <br />
-        <br />
+        <div style={{ height: "35px" }} />
         <div className="align-right">
           <GreenButton onClick={routeToVerify}>
             Generate What-If Report
