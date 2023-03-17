@@ -1,5 +1,10 @@
 // Adapted from http://web.mit.edu/6.813/www/sp18/assignments/as1-implementation/logging.js
 // A simple Google-spreadsheet-based event logging framework.
+
+// Call loggingjs.initialize() and pass in the participant ID
+// Call loggingjs.logEvent() with the following params: 'START', '1' 
+// Check https://docs.google.com/spreadsheets/d/11xAgg8_D9qaoKgkyHCbb88NgPFO0z3WqPhBT4Cw1H2A/edit?resourcekey#gid=114586490 to ensure your log is done
+
 const { IVs } = require("./constants");
 
 var FILTERNG_TECHNIQUE = IVs.IV1;

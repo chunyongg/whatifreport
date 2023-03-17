@@ -1,0 +1,85 @@
+import styles from "./CatalogPage.module.css";
+import ModuleCategory from "./ModuleCategory";
+
+function ModuleSubjects({
+  iv1,
+  iv2,
+  modules,
+  moduleSubjects,
+  currentFilter,
+  selected,
+  selectSubject,
+  unselectSubject,
+  addModule
+}) {
+  // https://www.comp.nus.edu.sg/cugresource/per-cohort/cs/cs-19-20/
+  function filteredSubjects() {
+    switch (iv1) {
+      case "Alphabet":
+        return moduleSubjects.filter((mod) =>
+          mod.subject.startsWith(currentFilter)
+        );
+      case "Relevance":
+        switch (currentFilter) {
+          case "Faculty Requirements":
+            return moduleSubjects.filter(
+              (mod) =>
+                mod.subject === "CS" ||
+                // Industrial Experience
+                mod.subject === "CP" ||
+                mod.subject === "TR" ||
+                // Mathematics and Sciences
+                mod.subject === "MA" ||
+                mod.subject === "CM" ||
+                mod.subject === "LSM" ||
+                mod.subject === "PC" ||
+                mod.subject === "ST" ||
+                // IT Professionalism
+                mod.subject === "ES" ||
+                mod.subject === "IS"
+            );
+          case "Major Requirements":
+            return moduleSubjects.filter((mod) => mod.subject === "CS");
+          case "General Education Requirements":
+            return moduleSubjects.filter((mod) => mod.subject.startsWith("GE"));
+          case "Minor Requirements":
+            return moduleSubjects.filter(
+              (mod) => mod.subject === "CS" || mod.subject === "NM"
+            );
+          default:
+            return moduleSubjects;
+        }
+      case "Search":
+        return moduleSubjects.filter((mod) =>
+          mod.subject.startsWith(currentFilter)
+        );
+      default:
+        return moduleSubjects.filter((mod) =>
+          mod.subject.startsWith(currentFilter)
+        );
+    }
+  }
+  const modulesMapped = filteredSubjects().map((mod, i) => (
+    <ModuleCategory
+      iv2={iv2}
+      allModules={modules}
+      subject={mod.subject}
+      name={mod.name}
+      key={i}
+      selected={selected}
+      selectSubject={selectSubject}
+      unselectCode={unselectSubject}
+      addModule={addModule}
+    />
+  ));
+  return (
+    <>
+      <div className={styles.moduleList}>
+        <p>Select subject code to display or hide course information.</p>
+      </div>
+      {modulesMapped}
+    </>
+  );
+}
+
+export default ModuleSubjects;

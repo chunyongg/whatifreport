@@ -1,16 +1,21 @@
 .h1 {
-  font-size: 18px;
-  color: rgb(74,89,140);
+  margin-top: 10px;
   font-family: Georgia,"Times New Roman",serif;
-  margin: 0;
-}
-
-.h2 {
-  font-family: Verdana,Arial,sans-serif;
   font-size: 16px;
   font-weight: bold;
   font-style: normal;
   color: rgb(74,89,140);
+  margin-bottom: 15px;
+  padding-right: 6px;
+}
+
+.h2 {
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  color: rgb(74,89,140);
+  margin-top: 15px;
 }
 
 .h3 {
@@ -18,10 +23,11 @@
 }
 
 .h4 {
-  font-size: 12px;
-  color: black;
-  font-weight: 400;
   font-family: Verdana,Arial,sans-serif;
+  font-size: 10px;
+  font-weight: normal;
+  font-style: normal;
+  color: rgb(0,0,0);
 }
 
 .p {
@@ -64,7 +70,38 @@
   font-weight: normal;
   font-style: normal;
   color: rgb(0,0,0);
+  vertical-align: middle;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  border-bottom-color: rgb(255,255,255);
+  border-right-color: rgb(255,255,255);
+  border-bottom-style: solid;
+  border-right-style: solid;
+  padding: 2px;
+}
+
+.tr {
   background-color: rgb(247,247,247);
+  cursor: default;
+}
+
+.tr:nth-child(even) {
+  background-color: #efefef;
+  cursor: default;
+}
+
+.tr:hover {
+  background-color: #f9fecb;
+  cursor: default;
+}
+
+.tdempty {
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 10px;
+  font-weight: normal;
+  font-style: normal;
+  color: rgb(0,0,0);
+  background-color: #d4dbd9;
   vertical-align: middle;
   border-bottom-width: 1px;
   border-right-width: 1px;
