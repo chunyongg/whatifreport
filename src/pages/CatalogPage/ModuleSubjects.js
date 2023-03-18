@@ -43,6 +43,7 @@ function ModuleSubjects({
     if (iv1 === "Search" && moduleSubjectsLocal.length < 10 && modules.length < 10) {
       expand();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moduleSubjectsLocal])
   useEffect(() => {
     const updated = filterSubjects();

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const { ALPHABETICAL, RELEVANCE, SEARCH, ONE, MULTIPLE, PRESENT, ABSENT } =
   require("../constants").allLevels;
 
