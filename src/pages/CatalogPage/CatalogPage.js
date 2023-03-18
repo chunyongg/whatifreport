@@ -5,7 +5,6 @@ import Page from "../../components/Page";
 import Header from "./Header";
 import FilterBox from "./FilterBox";
 import ModuleSubjects from "./ModuleSubjects";
-import ModuleCart from "../../components/ModuleCart";
 
 function CatalogPage({ iv1, iv2, iv3 }) {
   const [currentFilter, setFilter] = useState("A");
