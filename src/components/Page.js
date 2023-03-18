@@ -37,11 +37,11 @@ function Page(props) {
           </button>
         </div>
       </div>
-      <div className={styles.scrollarea}>
-        <div className={styles.left}>
+      <div className={styles.area}>
+        <div className={styles.scrollarea}>
           <div className={styles.content}>{props.children}</div>
         </div>
-        <div className={styles.right}>
+        <div className={styles.sidebar}>
           <ModuleCart />
         </div>
       </div>
