@@ -1,9 +1,12 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { connect } from "react-redux";
+import { addModule, removeModule } from "../../actions";
 import styles from "./CatalogPage.module.css";
 import ShortYellowButton from "../../components/ShortYellowButton";
+import Form from "react-bootstrap/Form";
 
-function ModuleList({ modules, addModule, iv2 }) {
+function ModuleList({ modules, addModule, removeModule, iv2 }) {
   const navigate = useNavigate();
   if (modules.length === 0) {
     return (
@@ -11,6 +14,40 @@ function ModuleList({ modules, addModule, iv2 }) {
         <p>No active courses offered for this Subject.</p>
       </div>
     );
+  }
+  function SelectModuleButton({ mod }) {
+    const [isModuleSelected, setModuleSelected] = useState(false);
+    const handleCheckbox = () => {
+      setModuleSelected(!isModuleSelected);
+    };
+    useEffect(() => {
+      if (isModuleSelected) {
+        addModule(mod);
+      } else {
+        removeModule(mod);
+      }
+    }, [isModuleSelected, mod]);
+    if (!iv2) {
+      return (
+        <ShortYellowButton
+          onClick={() => {
+            addModule(mod);
+            navigate(-1);
+          }}
+        >
+          Select
+        </ShortYellowButton>
+      );
+    } else {
+      return (
+        <Form.Check
+          type={"checkbox"}
+          id={`selected-checkbox`}
+          value={isModuleSelected}
+          onChange={handleCheckbox}
+        />
+      );
+    }
   }
   const mapped = modules.map((mod, i) => (
     <tr
@@ -27,16 +64,7 @@ function ModuleList({ modules, addModule, iv2 }) {
       <td className={styles.td}> {mod.courseName}</td>
       <td className={styles.td}></td>
       <td className={styles.td}>
-        <ShortYellowButton
-          onClick={() => {
-            addModule(mod);
-            if (!iv2) {
-              navigate(-1);
-            }
-          }}
-        >
-          Select
-        </ShortYellowButton>
+        <SelectModuleButton mod={mod} />
       </td>
     </tr>
   ));
@@ -63,4 +91,9 @@ function ModuleList({ modules, addModule, iv2 }) {
   );
 }
 
-export default ModuleList;
+const mapDispatchToProps = (dispatch) => ({
+  addModule: (module) => dispatch(addModule(module)),
+  removeModule: (module) => dispatch(removeModule(module)),
+});
+
+export default connect(null, mapDispatchToProps)(ModuleList);

@@ -16,7 +16,6 @@ function ModuleSubjects({
   iv1,
   iv2,
   currentFilter,
-  addModule,
   updateModuleList,
   moduleSubjects,
   modules,
@@ -40,11 +39,15 @@ function ModuleSubjects({
     ...moduleSubjects,
   ]);
   useEffect(() => {
-    if (iv1 === "Search" && moduleSubjectsLocal.length < 10 && modules.length < 10) {
+    if (
+      iv1 === "Search" &&
+      moduleSubjectsLocal.length < 10 &&
+      modules.length < 10
+    ) {
       expand();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [moduleSubjectsLocal])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [moduleSubjectsLocal]);
   useEffect(() => {
     const updated = filterSubjects();
     updateModuleSubjects(updated);
@@ -142,7 +145,6 @@ function ModuleSubjects({
       selected={selectedModuleSubjects}
       selectSubject={selectSubject}
       unselectSubject={unselectSubject}
-      addModule={addModule}
     />
   ));
   /* Collapse all accordions */
