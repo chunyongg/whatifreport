@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Page.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import ModuleCart from "./ModuleCart";
 
 function Page(props) {
   const navigate = useNavigate();
@@ -37,7 +38,12 @@ function Page(props) {
         </div>
       </div>
       <div className={styles.scrollarea}>
-        <div className={styles.content}>{props.children}</div>
+        <div className={styles.left}>
+          <div className={styles.content}>{props.children}</div>
+        </div>
+        <div className={styles.right}>
+          <ModuleCart />
+        </div>
       </div>
     </div>
   );

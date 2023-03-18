@@ -5,7 +5,7 @@ import Page from "../../components/Page";
 import Header from "./Header";
 import FilterBox from "./FilterBox";
 import ModuleSubjects from "./ModuleSubjects";
-import ModuleCart from "./ModuleCart";
+import ModuleCart from "../../components/ModuleCart";
 
 function CatalogPage({ iv1, iv2, iv3 }) {
   const [currentFilter, setFilter] = useState("A");
@@ -16,7 +16,7 @@ function CatalogPage({ iv1, iv2, iv3 }) {
   };
 
   return (
-    <Page>
+    <Page title="What-if Report Scenario">
       <div className={styles.container}>
         <Header />
         <FilterBox
@@ -28,7 +28,7 @@ function CatalogPage({ iv1, iv2, iv3 }) {
         <div style={{ height: "10px" }} />
         <hr />
         <div style={{ height: "30px" }} />
-        {iv3 && <ModuleCart />}
+        {/* {iv3 && <ModuleCart />} */}
       </div>
     </Page>
   );
