@@ -30,6 +30,7 @@ function ModuleList({ modules, addModule, removeModule, iv2 }) {
     if (!iv2) {
       return (
         <ShortYellowButton
+          className={styles.selectbtn}
           onClick={() => {
             addModule(mod);
             navigate(-1);
@@ -43,8 +44,9 @@ function ModuleList({ modules, addModule, removeModule, iv2 }) {
         <Form.Check
           type={"checkbox"}
           id={`selected-checkbox`}
-          value={isModuleSelected}
           onChange={handleCheckbox}
+          className={styles.checkbox}
+          checked={isModuleSelected}
         />
       );
     }
@@ -72,16 +74,16 @@ function ModuleList({ modules, addModule, removeModule, iv2 }) {
     <table className={styles.table}>
       <thead>
         <tr>
-          <th className={`${styles.th} ${styles.firstCol}`} width={60}>
+          <th className={`${styles.th} ${styles.firstCol}`} width="45">
             Module Nbr
           </th>
-          <th className={styles.th} width="300">
+          <th className={styles.th} width="183">
             Module Title
           </th>
-          <th className={styles.th} width="60">
+          <th className={styles.th} width="37">
             Typically Offered
           </th>
-          <th className={styles.th} width="80">
+          <th className={styles.th} width="48">
             Select
           </th>
         </tr>

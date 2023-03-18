@@ -135,7 +135,7 @@
 }
 
 .table {
-  width: 100%;
+  width: 485px;
   table-layout: fixed;
   display: table;
   border-collapse: collapse;
@@ -144,22 +144,24 @@
 }
 
 .th {
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  color: #4b6987;
-  background-color: #f9f9f9;
   vertical-align: middle;
   border-width: 1px;
   border-color: rgb(230, 230, 230);
   border-style: solid;
   padding: 2px;
+  background-color: #f9f9f9;
+  color: #4b6987;
+  font-family: Arial, sans-serif;
+  font-size: 8pt;
+  font-style: normal;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .td {
   color: #004b91;
   font-family: Arial, sans-serif;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: normal;
   font-style: normal;
   line-height: 100%;
@@ -214,4 +216,12 @@
 textarea:focus,
 input:focus {
   outline: none;
+}
+
+.checkbox {
+  transform: scaleX(3.5) translateX(38%);
+}
+
+.selectbtn {
+  width: 48px;
 }
