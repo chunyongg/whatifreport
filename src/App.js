@@ -39,8 +39,6 @@ function App() {
     return b && (b == 1 || b == 2 || b == 3);
   };
   const isValidLink = () => {
-    console.log(isAValid);
-    console.log(isBValid);
     return (isAValid() && isBValid() && isRoot) || isInit;
   };
 
@@ -60,10 +58,13 @@ function App() {
               path="/catalog"
               element={
                 <CatalogPage
-                  iv1={values.IV1}
-                  iv2={values.IV2}
-                  iv3={values.IV3}
-                  trialNum={values.TRIAL}
+                  // iv1={values.IV1}
+                  // iv2={values.IV2}
+                  // iv3={values.IV3}
+                  iv1="Alphabet"
+                  iv2={true}
+                  iv3={true}
+                  // trialNum={values.TRIAL}
                 />
               }
             />
