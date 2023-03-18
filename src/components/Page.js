@@ -41,9 +41,11 @@ function Page(props) {
         <div className={styles.scrollarea}>
           <div className={styles.content}>{props.children}</div>
         </div>
-        <div className={styles.sidebar}>
-          <ModuleCart />
-        </div>
+        {props.iv3 && (
+          <div className={styles.sidebar}>
+            <ModuleCart />
+          </div>
+        )}
       </div>
     </div>
   );

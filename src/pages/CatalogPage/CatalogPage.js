@@ -16,7 +16,7 @@ function CatalogPage({ iv1, iv2, iv3 }) {
   };
 
   return (
-    <Page title="What-if Report Scenario">
+    <Page title="What-if Report Scenario" iv3={iv3}>
       <div className={styles.container}>
         <Header />
         <FilterBox
@@ -28,7 +28,6 @@ function CatalogPage({ iv1, iv2, iv3 }) {
         <div style={{ height: "10px" }} />
         <hr />
         <div style={{ height: "30px" }} />
-        {/* {iv3 && <ModuleCart />} */}
       </div>
     </Page>
   );
