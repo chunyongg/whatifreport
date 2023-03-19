@@ -29963,7 +29963,7 @@ const moduleNames = [
   "Cultural Borrowing: Japan and China",
   "Understanding Consumption",
   "Geopolitics: Geographies of War & Peace",
-  "Exploring Chinese Cinema: Shanghaiâ€Hong Kongâ€Singapore",
+  "Exploring Chinese Cinema: Shanghai-Hong Kong-Singapore!",
   "Drugs and Society",
   "Clean Energy and Storage",
   "Microbes which Changed Human History",

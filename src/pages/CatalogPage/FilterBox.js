@@ -190,7 +190,7 @@ function FilterBoxBySearch({ callback, hasClickedFirstClick, updateFirstClick })
   };
 
   useEffect(() => {
-    const timeOutId = setTimeout(() => callback(query), 500);
+    const timeOutId = setTimeout(() => callback(query.toUpperCase()), 500);
     return () => clearTimeout(timeOutId);
   });
 
