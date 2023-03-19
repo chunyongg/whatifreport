@@ -93,7 +93,10 @@ function ModuleList({
     }
   }
 
-  const mapped = modules.map((mod, i) => (
+  const sortedModules = modules.sort(
+    (a, b) => parseInt(a.code) - parseInt(b.code)
+  );
+  const mapped = sortedModules.map((mod, i) => (
     <tr className={styles.tr} key={i}>
       <td className={`${styles.td} ${styles.firstCol}`}>{mod.code}</td>
       <td className={styles.td}> {mod.courseName}</td>
