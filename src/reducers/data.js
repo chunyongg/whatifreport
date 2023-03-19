@@ -20,15 +20,23 @@ const DEFAULT_DATA = {
     },
   ],
   allModules,
+  hasClickedFirstClick: false,
+  isNewAttempt: true,
 };
 
 const data = (state = DEFAULT_DATA, action) => {
   switch (action.type) {
-    case 'UPDATE_LIST':
+    case "START_ATTEMPT":
+      return {...state, isNewAttempt: false}
+    case "RESTART_ATTEMPT":
+      return {...state, isNewAttempt: true, hasClickedFirstClick: false}
+    case "FIRST_CLICK":
+      return { ...state, hasClickedFirstClick: true };
+    case "UPDATE_LIST":
       return {
         ...state,
-        allModules: [...action.modules]
-      }
+        allModules: [...action.modules],
+      };
     case "UPDATE_CORRECT_MODULES":
       return {
         ...state,

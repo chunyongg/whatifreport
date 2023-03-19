@@ -8,16 +8,36 @@ import Popup from "../../components/Popup";
 
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { removeModule } from "../../actions";
+import { removeModule, startAttempt } from "../../actions";
 import loggingjs from '../../logging';
 
-function HomePage({moduleCart, removeModule}) {
+function HomePage({moduleCart, removeModule, isNewAttempt, startAttempt}) {
   const navigate = useNavigate();
   const openCourseCatalog = () => {
-    loggingjs.logEvent('FIND_MODULES_START', 1);
+    if (isNewAttempt) {
+      startAttempt();
+      loggingjs.logEvent('FIND_MODULES_START', 1);
+    }
     navigate('/catalog');
   }
   const routeToVerify = () => {
+    const modules = {};
+    for (const mod of moduleCart) {
+      const code = mod.code;
+      const subject = mod.subject;
+      const combined = `${subject}${code}`;
+      const existing = modules[combined];
+      if (existing) {
+        modules[combined]++;
+      } else {
+        modules[combined] = 1;
+      }
+    }
+    const keys = Object.values(modules).filter((key) => key > 1);
+    if (keys.length > 0) {
+      const combined = keys.reduce((a,b) => a + b, 0);
+      loggingjs.logEvent('DUPLICATE_MODS', combined);
+    }
     navigate('/verify', {replace: true, });
   }
   const [showPopup, setShowPopup] = useState(false);
@@ -227,12 +247,14 @@ function HomePage({moduleCart, removeModule}) {
 function mapStateToProps(state) {
   const moduleCart = state.moduleCart;
   return {
-    moduleCart
+    moduleCart,
+    isNewAttempt: state.data.isNewAttempt,
   };
 }
 
 const mapDispatchToProps = (dispatch) => ({
   removeModule: (module) => dispatch(removeModule(module)),
+  startAttempt: () => dispatch(startAttempt())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

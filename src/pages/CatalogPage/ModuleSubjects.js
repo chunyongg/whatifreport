@@ -40,12 +40,12 @@ function ModuleSubjects({
     ...moduleSubjects,
   ]);
   useEffect(() => {
-    if (
-      iv1 === allLevels.SEARCH &&
-      moduleSubjectsLocal.length < 10 &&
-      modules.length < 10
-    ) {
-      expand();
+    if (iv1 === allLevels.SEARCH) {
+      if (moduleSubjectsLocal.length === 1 ) {
+        expand();
+      } else {
+        collapse();
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moduleSubjectsLocal]);

@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import loggingjs, { IVs } from "./logging";
 import { IVConditions } from "./data/data";
-
+import invalidLink from "./assets/404.jpg";
 const store = createStore(rootReducer);
 
 function App() {
@@ -47,7 +47,10 @@ function App() {
   }
 
   function InvalidContent() {
-    return <div>Invalid Link</div>;
+    return <div className="invalid">
+    <img src={invalidLink} alt="Invalid img" width="500" />
+    <h1>Invalid Link</h1>
+    </div>;
   }
 
   function ValidContent() {

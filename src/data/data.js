@@ -603,7 +603,6 @@ export const getCorrectModules = (condition, trialTask) => {
 };
 
 const moduleSubjectCodes = [
-  "NM",
   "ABM",
   "ABM",
   "ABM",
@@ -8460,6 +8459,7 @@ const moduleSubjectCodes = [
   "NM",
   "NM",
   "NM",
+  "NM",
   "NMC",
   "NMC",
   "NMC",
@@ -12924,7 +12924,6 @@ const moduleSubjectCodes = [
 ];
 
 const moduleCodes = [
-  "2213",
   "(5001)",
   "(5002)",
   "(5003)",
@@ -20714,6 +20713,7 @@ const moduleCodes = [
   "2104",
   "2207",
   "2209",
+  "2213",
   "2219",
   "2220",
   "2223",
@@ -25245,7 +25245,6 @@ const moduleCodes = [
 ];
 
 const moduleNames = [
-  "Introduction to User Experience Design",
   "Leadership in Biomedicine",
   "Advanced Biostatistics for Research",
   "Biomedical Innovation & Enterprise",
@@ -29963,7 +29962,7 @@ const moduleNames = [
   "Cultural Borrowing: Japan and China",
   "Understanding Consumption",
   "Geopolitics: Geographies of War & Peace",
-  "Exploring Chinese Cinema: Shanghai-Hong Kong-Singapore!",
+  "Exploring Chinese Cinema: ShangHai-Hong Kong Singapore",
   "Drugs and Society",
   "Clean Energy and Storage",
   "Microbes which Changed Human History",
@@ -30019,7 +30018,7 @@ const moduleNames = [
   "A Brief History of Science",
   "Food & Health",
   "Geopolitics:Geographies of War & Peace",
-  "Exploring Chinese Cinema: Shanghaiâ€Hong Kongâ€Singapore",
+  "Exploring Chinese Cinema: ShangHai-Hong Kong Singapore",
   "International Relations of Asia",
   "Global Environmental Issues",
   "Global Environmental Issues",
@@ -33035,6 +33034,7 @@ const moduleNames = [
   "Qualitative Communication Research Methods",
   "Computational Media Literacy",
   "Social Psychology of New Media",
+  "Introduction to User Experience Design",
   "Principles of Communication Management",
   "Introduction to Media Writing",
   "Media Law and Policy",
@@ -37253,7 +37253,7 @@ const moduleNames = [
   "Statistical Computing",
   "Coral Reef Ecology and Environmental Change",
   "The Biology of Ageing",
-  "Molecular Biology",
+  "Molecular Biology",  
   "Arthropods and the Anthropocene",
   "Environmental Chemistry: How The Science Informs Our Policies",
   "Plant-Microbe Interactions",
@@ -38727,7 +38727,7 @@ export const filterAllModulesListBySearch = (searched) => {
   }
   allModules = allModulesBackedUp.filter((mod) => {
     return (
-      mod.courseName.startsWith(searched) || mod.subject.startsWith(searched)
+      mod.courseName.toLowerCase().startsWith(searched.toLowerCase()) || mod.subject.toLowerCase().startsWith(searched.toLowerCase())
     );
   });
 };
