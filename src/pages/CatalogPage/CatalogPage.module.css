@@ -244,10 +244,5 @@ input:focus {
   height: 19px;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
-
-/* .checkbox input[type="checkbox"]:checked {
-  border: 1px solid #d8a676;
-  color: rgb(51, 51, 51);
-  background-color: #fae7c5;
-} */
