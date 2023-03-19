@@ -26,11 +26,11 @@ function ModuleCart({ modules }) {
     <div className={styles.moduleCart}>
       <p className={styles.title}>Modules Selected:</p>
       <p className={styles.items}>{selectedModules()}</p>
-      <p className={styles.footer}>
+      {/* <p className={styles.footer}>
         <LongYellowButton className={styles.btn} onClick={navigateBack}>
           Next
         </LongYellowButton>
-      </p>
+      </p> */}
     </div>
   );
 }
