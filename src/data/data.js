@@ -37253,7 +37253,7 @@ const moduleNames = [
   "Statistical Computing",
   "Coral Reef Ecology and Environmental Change",
   "The Biology of Ageing",
-  "Molecular Biology",
+  "Molecular Biology",  
   "Arthropods and the Anthropocene",
   "Environmental Chemistry: How The Science Informs Our Policies",
   "Plant-Microbe Interactions",
@@ -38727,7 +38727,7 @@ export const filterAllModulesListBySearch = (searched) => {
   }
   allModules = allModulesBackedUp.filter((mod) => {
     return (
-      mod.courseName.startsWith(searched) || mod.subject.startsWith(searched)
+      mod.courseName.toLowerCase().startsWith(searched.toLowerCase()) || mod.subject.toLowerCase().startsWith(searched.toLowerCase())
     );
   });
 };
