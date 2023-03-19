@@ -9,10 +9,12 @@ import Popup from "../../components/Popup";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { removeModule } from "../../actions";
+import loggingjs from '../../logging';
 
 function HomePage({moduleCart, removeModule}) {
   const navigate = useNavigate();
   const openCourseCatalog = () => {
+    loggingjs.logEvent('FIND_MODULES_START', 1);
     navigate('/catalog');
   }
   const routeToVerify = () => {
