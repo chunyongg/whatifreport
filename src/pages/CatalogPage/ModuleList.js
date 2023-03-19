@@ -26,6 +26,13 @@ function ModuleList({
   }
 
   function loggingLogic(mod) {
+    const invalidSelectedModules = selectedModules.filter((selected) => {
+      const isModuleAddedCorrect = correctModules.find((correctMod) => correctMod.code === selected.code && correctMod.subject === selected.subject);
+      return !isModuleAddedCorrect;
+    })
+    if (invalidSelectedModules.length > 0) {
+      return; //user added modules they should not have added, do not log until this is resolved
+    }
     if (selectedModules.length === 0) {
       const correctMod = correctModules[0];
       const isCorrectMod = mod.code === correctMod.code && mod.subject === correctMod.subject;
@@ -50,11 +57,10 @@ function ModuleList({
 
   function SelectModuleButton({ mod }) {
     const isModuleSelected = selectedModules.find((selected) => selected.code === mod.code && selected.subject === mod.subject);
-
     const handleCheckbox = () => {
       if (!isModuleSelected) {
-        loggingLogic(mod);
         addModule(mod);
+        loggingLogic(mod);
       } else {
         removeModule(mod);
       }
@@ -65,8 +71,8 @@ function ModuleList({
         <ShortYellowButton
           className={styles.selectbtn}
           onClick={() => {
-            loggingLogic(mod);
             addModule(mod);
+            loggingLogic(mod);
             navigate(-1);
           }}
         >

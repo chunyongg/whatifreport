@@ -8,13 +8,16 @@ import Popup from "../../components/Popup";
 
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { removeModule } from "../../actions";
+import { removeModule, startAttempt } from "../../actions";
 import loggingjs from '../../logging';
 
-function HomePage({moduleCart, removeModule}) {
+function HomePage({moduleCart, removeModule, isNewAttempt, startAttempt}) {
   const navigate = useNavigate();
   const openCourseCatalog = () => {
-    loggingjs.logEvent('FIND_MODULES_START', 1);
+    if (isNewAttempt) {
+      startAttempt();
+      loggingjs.logEvent('FIND_MODULES_START', 1);
+    }
     navigate('/catalog');
   }
   const routeToVerify = () => {
@@ -227,12 +230,14 @@ function HomePage({moduleCart, removeModule}) {
 function mapStateToProps(state) {
   const moduleCart = state.moduleCart;
   return {
-    moduleCart
+    moduleCart,
+    isNewAttempt: state.data.isNewAttempt,
   };
 }
 
 const mapDispatchToProps = (dispatch) => ({
   removeModule: (module) => dispatch(removeModule(module)),
+  startAttempt: () => dispatch(startAttempt())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

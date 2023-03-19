@@ -2,6 +2,9 @@ import styles from "./CatalogPage.module.css";
 import ModuleList from "./ModuleList";
 import openTriangle from "../../assets/triangle-expanded.jpg";
 import triangle from "../../assets/triangle.jpg";
+import loggingjs from "../../logging";
+import { firstClick } from "../../actions";
+import { connect } from "react-redux";
 
 function ModuleCategory({
   iv2,
@@ -11,6 +14,8 @@ function ModuleCategory({
   selected,
   selectSubject,
   unselectSubject,
+  hasClickedFirstClick,
+  updateFirstClick
 }) {
   const isSelected = selected.includes(subject);
   const filteredModules = allModules.filter((mod) => mod.subject === subject);
@@ -18,6 +23,10 @@ function ModuleCategory({
     <>
       <div
         onClick={() => {
+          if (!hasClickedFirstClick) {
+            updateFirstClick();
+            loggingjs.logEvent('FIRST_CLICK_FAIL', 1);
+          }
           if (!isSelected) {
             selectSubject(subject);
           } else {
@@ -40,4 +49,15 @@ function ModuleCategory({
   );
 }
 
-export default ModuleCategory;
+
+const mapStateToProps = (state) => {
+  return {
+    hasClickedFirstClick: state.data.hasClickedFirstClick,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  updateFirstClick: () => dispatch(firstClick()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModuleCategory);

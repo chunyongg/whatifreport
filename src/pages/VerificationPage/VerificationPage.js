@@ -1,11 +1,11 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import styles from "./VerificationPage.module.css";
 import BlueButton from "../../components/BlueButton";
 import { useNavigate } from "react-router-dom";
 import { getSuccessCode } from "../../constants";
 import loggingjs from "../../logging";
+import { connect } from "react-redux";
+import { resetModuleAddedList, restart } from "../../actions";
 
 function Pass() {
   const code = getSuccessCode().toString();
@@ -19,9 +19,11 @@ function Pass() {
   );
 }
 
-function Fail() {
+function Fail({restart, resetList}) {
   const navigate = useNavigate();
-  const restart = () => {
+  const restartCallback = () => {
+    restart();
+    resetList();
     navigate("/home/", { replace: true });
   };
 
@@ -29,15 +31,15 @@ function Fail() {
     <div className={styles.container}>
       <h1 className={styles.red}>Graduation requirements failed</h1>
       <p>Please try again and add the correct modules</p>
-      <BlueButton className={styles.button} onClick={restart}>
+      <BlueButton className={styles.button} onClick={restartCallback}>
         Restart
       </BlueButton>
     </div>
   );
 }
 
-function VerificationPage({ isIdentical }) {
-  return isIdentical ? <Pass /> : <Fail />;
+function VerificationPage({ isIdentical, restart, resetList }) {
+  return isIdentical ? <Pass /> : <Fail restart={restart} resetList={resetList} />;
 }
 
 function mapStateToProps(state) {
@@ -62,4 +64,10 @@ function mapStateToProps(state) {
     isIdentical,
   };
 }
-export default connect(mapStateToProps)(VerificationPage);
+
+const mapDispatchToProps = (dispatch) => ({
+  restart: () => dispatch(restart()),
+  resetList: () => dispatch(resetModuleAddedList()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(VerificationPage);

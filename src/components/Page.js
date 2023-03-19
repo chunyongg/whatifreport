@@ -3,13 +3,21 @@ import styles from "./Page.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import ModuleCart from "./ModuleCart";
 import { allLevels } from "../constants";
+import { connect } from "react-redux";
+import loggingjs from "../logging";
+import { firstClick } from "../actions";
 
 function Page(props) {
+  const {hasClickedFirstClick, updateFirstClick} = props;
   const navigate = useNavigate();
   const location = useLocation();
   const navigateBack = () => {
     const path = location.pathname;
-    if (path !== "/") {
+    if (path !== "/" && path !== "/home") {
+      if (!hasClickedFirstClick) {
+        updateFirstClick();
+        loggingjs.logEvent('FIRST_CLICK_FAIL', 1);
+      }
       navigate(-1);
     }
   };
@@ -52,4 +60,15 @@ function Page(props) {
   );
 }
 
-export default Page;
+const mapStateToProps = (state) => {
+  return {
+    hasClickedFirstClick: state.data.hasClickedFirstClick,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  updateFirstClick: () => dispatch(firstClick()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page);
+
