@@ -169,7 +169,7 @@
   border-width: 1px;
   border-color: rgb(230, 230, 230);
   border-style: solid;
-  padding: 8px 4px;
+  padding: 2px 4px;
 }
 
 .td:hover {
@@ -219,9 +219,25 @@ input:focus {
 }
 
 .checkbox {
-  transform: scaleX(3.5) translateX(38%);
+  margin: 0;
+  margin: 2px 0;
+  margin-left: 2px;
 }
 
 .selectbtn {
-  width: 48px;
+  width: 51px;
+  height: 19px;
 }
+
+.checkbox input[type="checkbox"] {
+  width: 51px;
+  height: 19px;
+  margin: 0;
+  padding: 0;
+}
+
+/* .checkbox input[type="checkbox"]:checked {
+  border: 1px solid #d8a676;
+  color: rgb(51, 51, 51);
+  background-color: #fae7c5;
+} */
