@@ -143,6 +143,21 @@
   margin-top: 4px;
 }
 
+.tr {
+  background-color: #ffffff;
+  cursor: default;
+}
+
+.tr:nth-child(even) {
+  background-color: #f9f9f9;
+  cursor: default;
+}
+
+.tr:hover {
+  background-color: #f9fecb;
+  cursor: default;
+}
+
 .th {
   vertical-align: middle;
   border-width: 1px;
@@ -176,7 +191,6 @@
   text-decoration: underline;
   text-decoration-color: #b26a2f;
   color: #b26a2f;
-  cursor: pointer;
 }
 
 .select {

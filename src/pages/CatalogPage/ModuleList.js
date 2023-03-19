@@ -94,10 +94,7 @@ function ModuleList({
   }
 
   const mapped = modules.map((mod, i) => (
-    <tr
-      className={(i + 1) % 2 === 0 ? `${styles.even}` : `${styles.odd}`}
-      key={i}
-    >
+    <tr className={styles.tr} key={i}>
       <td className={`${styles.td} ${styles.firstCol}`}>{mod.code}</td>
       <td className={styles.td}> {mod.courseName}</td>
       <td className={styles.td}></td>
