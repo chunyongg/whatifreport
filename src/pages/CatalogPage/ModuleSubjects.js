@@ -11,6 +11,7 @@ import styles from "./CatalogPage.module.css";
 import ModuleCategory from "./ModuleCategory";
 import { useEffect, useState } from "react";
 import UtilityButtons from "./UtilityButtons";
+import { allLevels } from "../../constants";
 
 function ModuleSubjects({
   iv1,
@@ -40,7 +41,7 @@ function ModuleSubjects({
   ]);
   useEffect(() => {
     if (
-      iv1 === "Search" &&
+      iv1 === allLevels.SEARCH &&
       moduleSubjectsLocal.length < 10 &&
       modules.length < 10
     ) {
@@ -56,13 +57,13 @@ function ModuleSubjects({
 
   function filterSubjects() {
     switch (iv1) {
-      case "Alphabet":
+      case allLevels.ALPHABETICAL:
         restoreAllModulesList();
         updateModuleList(allModules);
         return moduleSubjects.filter((mod) =>
           mod.subject.startsWith(currentFilter)
         );
-      case "Relevance":
+      case allLevels.RELEVANCE:
         switch (currentFilter) {
           case "Faculty Requirements":
             filterAllModulesList();
@@ -100,7 +101,7 @@ function ModuleSubjects({
           default:
             return moduleSubjects;
         }
-      case "Search":
+      case allLevels.SEARCH:
         const firstDigit = currentFilter.match(/\d/); // will give you the first digit in the string
         const index = currentFilter.indexOf(firstDigit);
         let code = currentFilter;

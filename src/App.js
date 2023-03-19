@@ -8,7 +8,7 @@ import VerificationPage from "./pages/VerificationPage/VerificationPage";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
-import loggingjs from "./logging";
+import loggingjs, { IVs } from "./logging";
 import { IVConditions } from "./data/data";
 
 const store = createStore(rootReducer);
@@ -27,27 +27,30 @@ function App() {
     if (!a) {
       return false;
     }
-    var i = validA.length;
-    while (i--) {
-      if (validA[i] === a) {
-        return true;
-      }
-    }
-    return false;
+    return validA.find((item) => item === a);
   };
   const isBValid = () => {
-    return b && (b == 1 || b == 2 || b == 3);
+    if (!b) {
+      return false;
+    }
+    const intB = parseInt(b);
+    return intB === 1 || intB === 2 || intB === 3;
   };
   const isValidLink = () => {
     return (isAValid() && isBValid() && isRoot) || isInit;
   };
+  if (!isInit && isValidLink()) {
+    IVs.IV1 = IVConditions[a].IV1;
+    IVs.IV2 = IVConditions[a].IV2;
+    IVs.IV3 = IVConditions[a].IV3;
+    IVs.TRIAL = parseInt(b);
+  }
 
   function InvalidContent() {
     return <div>Invalid Link</div>;
   }
 
   function ValidContent() {
-    const values = IVConditions[a];
     return (
       <Provider store={store}>
         <div className="App">
@@ -57,15 +60,7 @@ function App() {
             <Route
               path="/catalog"
               element={
-                <CatalogPage
-                  // iv1={values.IV1}
-                  // iv2={values.IV2}
-                  // iv3={values.IV3}
-                  iv1="Alphabet"
-                  iv2={true}
-                  iv3={true}
-                  // trialNum={values.TRIAL}
-                />
+                <CatalogPage iv1={IVs.IV1} iv2={IVs.IV2} iv3={IVs.IV3} />
               }
             />
             <Route path="/verify" element={<VerificationPage />} />
@@ -75,7 +70,7 @@ function App() {
     );
   }
 
-  return isValidLink ? <ValidContent /> : <InvalidContent />;
+  return isValidLink() ? <ValidContent /> : <InvalidContent />;
 }
 
 export default App;

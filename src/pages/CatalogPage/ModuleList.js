@@ -5,8 +5,15 @@ import { addModule, removeModule } from "../../actions";
 import styles from "./CatalogPage.module.css";
 import ShortYellowButton from "../../components/ShortYellowButton";
 import Form from "react-bootstrap/Form";
+import { allLevels } from "../../constants";
 
-function ModuleList({ modules, addModule, removeModule, iv2 }) {
+function ModuleList({
+  modules,
+  addModule,
+  removeModule,
+  iv2,
+  selectedModules,
+}) {
   const navigate = useNavigate();
   if (modules.length === 0) {
     return (
@@ -18,16 +25,25 @@ function ModuleList({ modules, addModule, removeModule, iv2 }) {
   function SelectModuleButton({ mod }) {
     const [isModuleSelected, setModuleSelected] = useState(false);
     const handleCheckbox = () => {
-      setModuleSelected(!isModuleSelected);
+      setModuleSelected(
+        (prev) => !prev,
+        () => {
+          if (isModuleSelected) {
+            addModule(mod);
+          } else {
+            removeModule(mod);
+          }
+        }
+      );
     };
-    useEffect(() => {
-      if (isModuleSelected) {
-        addModule(mod);
-      } else {
-        removeModule(mod);
-      }
-    }, [isModuleSelected, mod]);
-    if (!iv2) {
+    // useEffect(() => {
+    //   if (isModuleSelected) {
+    //     addModule(mod);
+    //   } else {
+    //     removeModule(mod);
+    //   }
+    // }, [isModuleSelected, mod]);
+    if (iv2 === allLevels.ONE) {
       return (
         <ShortYellowButton
           className={styles.selectbtn}
@@ -39,14 +55,17 @@ function ModuleList({ modules, addModule, removeModule, iv2 }) {
           Select
         </ShortYellowButton>
       );
-    } else {
+    } else if (iv2 === allLevels.MULTIPLE) {
       return (
         <Form.Check
           type={"checkbox"}
           id={`selected-checkbox`}
           onChange={handleCheckbox}
           className={styles.checkbox}
-          checked={isModuleSelected}
+          checked={selectedModules.find((module) => {
+            const moduleName = module.subject + module.code;
+            return moduleName === mod;
+          })}
         />
       );
     }
@@ -93,9 +112,16 @@ function ModuleList({ modules, addModule, removeModule, iv2 }) {
   );
 }
 
+function mapStateToProps(state) {
+  const moduleCart = state.moduleCart;
+  return {
+    selectedModules: moduleCart,
+  };
+}
+
 const mapDispatchToProps = (dispatch) => ({
   addModule: (module) => dispatch(addModule(module)),
   removeModule: (module) => dispatch(removeModule(module)),
 });
 
-export default connect(null, mapDispatchToProps)(ModuleList);
+export default connect(mapStateToProps, mapDispatchToProps)(ModuleList);
