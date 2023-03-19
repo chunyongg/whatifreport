@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./ModuleCart.module.css";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 function ModuleCart({ modules }) {
   const selectedModules = () => {
