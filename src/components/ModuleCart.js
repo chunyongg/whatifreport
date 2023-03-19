@@ -19,7 +19,7 @@ function ModuleCart({ modules }) {
   return (
     <div className={styles.moduleCart}>
       <p className={styles.title}>Modules Selected:</p>
-      <p className={styles.items}>{selectedModules()}</p>
+      <div className={styles.items}>{selectedModules()}</div>
     </div>
   );
 }
