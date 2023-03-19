@@ -2,24 +2,25 @@ import { useState, useEffect } from "react";
 
 import styles from "./CatalogPage.module.css";
 import SearchIcon from "../../assets/Search.png";
+import { allLevels } from "../../constants";
 
 function FilterBox({ iv1, currentFilter, callback }) {
   switch (iv1) {
-    case "Alphabet":
+    case allLevels.ALPHABETICAL:
       return (
         <FilterBoxByAlphabet
           currentFilter={currentFilter}
           callback={callback}
         />
       );
-    case "Relevance":
+    case allLevels.RELEVANCE:
       return (
         <FilterBoxByRelevance
           currentFilter={currentFilter}
           callback={callback}
         />
       );
-    case "Search":
+    case allLevels.SEARCH:
       return <FilterBoxBySearch callback={callback} />;
     default:
       return <div>Invalid Filter</div>;

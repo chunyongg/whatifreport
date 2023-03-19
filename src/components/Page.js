@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./Page.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import ModuleCart from "./ModuleCart";
+import { allLevels } from "../constants";
 
 function Page(props) {
   const navigate = useNavigate();
@@ -36,8 +38,15 @@ function Page(props) {
           </button>
         </div>
       </div>
-      <div className={styles.scrollarea}>
-        <div className={styles.content}>{props.children}</div>
+      <div className={styles.area}>
+        <div className={styles.scrollarea}>
+          <div className={styles.content}>{props.children}</div>
+        </div>
+        {props.iv3 === allLevels.PRESENT && (
+          <div className={styles.sidebar}>
+            <ModuleCart />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -2,21 +2,19 @@
 const { ALPHABETICAL, RELEVANCE, SEARCH, ONE, MULTIPLE, PRESENT, ABSENT } =
   require("../constants").allLevels;
 
-// TODO: Populate with all conditons
-// 12 keys, representing conditions 1 - 12
-// Refer to https://docs.google.com/spreadsheets/d/1iSVlKy0-vKKXRyoGoiFfc9a1voMqbaZc/edit#gid=2133923558 under "Success Codes" sheet
+// Populate conditions with IVs
 // For the condition values, e.g. condition 1 has a value of 4
 export const IVConditions = {
   4: {
     IV1: ALPHABETICAL, //ALPHABETICAL, RELEVANCE OR SEARCH
     IV2: ONE, // ONE OR MULTIPLE
-    IV3: ABSENT, //PRESENT OR ABSENT,
+    IV3: PRESENT, //PRESENT OR ABSENT,
     TRIAL: "",
   },
   12: {
     IV1: ALPHABETICAL, //ALPHABETICAL, RELEVANCE OR SEARCH
     IV2: MULTIPLE, // ONE OR MULTIPLE
-    IV3: ABSENT, //PRESENT OR ABSENT
+    IV3: PRESENT, //PRESENT OR ABSENT
     TRIAL: "",
   },
   16: {
@@ -25,14 +23,67 @@ export const IVConditions = {
     IV3: ABSENT, //PRESENT OR ABSENT
     TRIAL: "",
   },
+  18: {
+    IV1: ALPHABETICAL, //ALPHABETICAL, RELEVANCE OR SEARCH
+    IV2: MULTIPLE, // ONE OR MULTIPLE
+    IV3: ABSENT, //PRESENT OR ABSENT
+    TRIAL: "",
+  },
+  23: {
+    IV1: RELEVANCE, //ALPHABETICAL, RELEVANCE OR SEARCH
+    IV2: ONE, // ONE OR MULTIPLE
+    IV3: PRESENT, //PRESENT OR ABSENT
+    TRIAL: "",
+  },
+  27: {
+    IV1: RELEVANCE, //ALPHABETICAL, RELEVANCE OR SEARCH
+    IV2: MULTIPLE, // ONE OR MULTIPLE
+    IV3: PRESENT, //PRESENT OR ABSENT
+    TRIAL: "",
+  },
+  29: {
+    IV1: RELEVANCE, //ALPHABETICAL, RELEVANCE OR SEARCH
+    IV2: ONE, // ONE OR MULTIPLE
+    IV3: ABSENT, //PRESENT OR ABSENT
+    TRIAL: "",
+  },
+  36: {
+    IV1: RELEVANCE, //ALPHABETICAL, RELEVANCE OR SEARCH
+    IV2: MULTIPLE, // ONE OR MULTIPLE
+    IV3: ABSENT, //PRESENT OR ABSENT
+    TRIAL: "",
+  },
+  45: {
+    IV1: SEARCH, //ALPHABETICAL, RELEVANCE OR SEARCH
+    IV2: ONE, // ONE OR MULTIPLE
+    IV3: PRESENT, //PRESENT OR ABSENT
+    TRIAL: "",
+  },
+  57: {
+    IV1: SEARCH, //ALPHABETICAL, RELEVANCE OR SEARCH
+    IV2: MULTIPLE, // ONE OR MULTIPLE
+    IV3: PRESENT, //PRESENT OR ABSENT
+    TRIAL: "",
+  },
+  83: {
+    IV1: SEARCH, //ALPHABETICAL, RELEVANCE OR SEARCH
+    IV2: ONE, // ONE OR MULTIPLE
+    IV3: ABSENT, //PRESENT OR ABSENT
+    TRIAL: "",
+  },
+  87: {
+    IV1: SEARCH, //ALPHABETICAL, RELEVANCE OR SEARCH
+    IV2: MULTIPLE, // ONE OR MULTIPLE
+    IV3: ABSENT, //PRESENT OR ABSENT
+    TRIAL: "",
+  },
 };
 
-// TODO: Populate with all conditions and trial tasks
+// Populate with all conditions and trial tasks
 // 36 keys, representing conditions 1-12 with each condition having 3 keys
 // Example: In condition 1, value is 4. 41 denotes trial task 1 of condition whose value is 4
-// Note the keys are '41' (string), NOT 41 (integer)
 const correctModuleCodes = {
-  41: [
+  "41": [
     {
       subject: "CS",
       code: "4249",
@@ -46,21 +97,483 @@ const correctModuleCodes = {
       code: "1070",
     },
   ],
-  42: [
+  "42": [
     {
       subject: "CS",
       code: "3230",
     },
     {
       subject: "NM",
-      code: "2214",
+      code: "2207",
     },
     {
       subject: "GET",
-      code: "1071",
+      code: "1042",
     },
   ],
-  43: [
+  "43": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "121": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "122": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "123": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "161": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "162": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "163": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "181": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "182": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "183": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "231": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "232": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "233": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "271": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "272": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "273": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "291": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "292": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "293": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "361": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "362": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "363": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "451": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "452": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "453": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "571": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "572": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "573": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "831": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "832": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "833": [
+    {
+      subject: "CS",
+      code: "2030",
+    },
+    {
+      subject: "NM",
+      code: "4247",
+    },
+    {
+      subject: "LAS",
+      code: "1201",
+    },
+  ],
+  "871": [
+    {
+      subject: "CS",
+      code: "4249",
+    },
+    {
+      subject: "NM",
+      code: "2213",
+    },
+    {
+      subject: "GEH",
+      code: "1070",
+    },
+  ],
+  "872": [
+    {
+      subject: "CS",
+      code: "3230",
+    },
+    {
+      subject: "NM",
+      code: "2207",
+    },
+    {
+      subject: "GET",
+      code: "1042",
+    },
+  ],
+  "873": [
     {
       subject: "CS",
       code: "2030",
@@ -38213,7 +38726,9 @@ export const filterAllModulesListBySearch = (searched) => {
     }
   }
   allModules = allModulesBackedUp.filter((mod) => {
-    return mod.courseName.startsWith(searched) || mod.subject.startsWith(searched);
+    return (
+      mod.courseName.startsWith(searched) || mod.subject.startsWith(searched)
+    );
   });
 };
 

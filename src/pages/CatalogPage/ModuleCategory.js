@@ -11,7 +11,6 @@ function ModuleCategory({
   selected,
   selectSubject,
   unselectSubject,
-  addModule
 }) {
   const isSelected = selected.includes(subject);
   const filteredModules = allModules.filter((mod) => mod.subject === subject);
@@ -36,13 +35,7 @@ function ModuleCategory({
           {subject} - {name}
         </span>
       </div>
-      {isSelected && (
-        <ModuleList
-          iv2={iv2}
-          modules={filteredModules}
-          addModule={addModule}
-        />
-      )}
+      {isSelected && <ModuleList iv2={iv2} modules={filteredModules} />}
     </>
   );
 }
