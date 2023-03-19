@@ -21,6 +21,23 @@ function HomePage({moduleCart, removeModule, isNewAttempt, startAttempt}) {
     navigate('/catalog');
   }
   const routeToVerify = () => {
+    const modules = {};
+    for (const mod of moduleCart) {
+      const code = mod.code;
+      const subject = mod.subject;
+      const combined = `${subject}${code}`;
+      const existing = modules[combined];
+      if (existing) {
+        modules[combined]++;
+      } else {
+        modules[combined] = 1;
+      }
+    }
+    const keys = Object.values(modules).filter((key) => key > 1);
+    if (keys.length > 0) {
+      const combined = keys.reduce((a,b) => a + b, 0);
+      loggingjs.logEvent('DUPLICATE_MODS', combined);
+    }
     navigate('/verify', {replace: true, });
   }
   const [showPopup, setShowPopup] = useState(false);
