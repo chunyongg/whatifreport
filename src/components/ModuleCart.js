@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 function ModuleCart({ modules }) {
   const selectedModules = () => {
     return modules.length === 0 ? (
-      <p>(None)</p>
+      <p>None</p>
     ) : (
       modules.map((mod, i) => (
         <p key={i} className={styles.item}>
