@@ -39,6 +39,7 @@
   overflow-y: auto !important;
   position: relative;
   text-align: left;
+  min-height: calc(100vh - 40px);
 }
 
 .sidebar {
