@@ -25,34 +25,20 @@ function ModuleList({
   }
 
   function loggingLogic(mod) {
-    const invalidSelectedModules = selectedModules.filter((selected) => {
-      const isModuleAddedCorrect = correctModules.find((correctMod) => correctMod.code === selected.code && correctMod.subject === selected.subject);
-      return !isModuleAddedCorrect;
-    })
-    if (invalidSelectedModules.length > 0) {
-      return; //user added modules they should not have added, do not log until this is resolved
+    const firstMod = correctModules[0];
+    if (mod.code === firstMod.code && mod.subject === firstMod.subject) {
+      loggingjs.logEvent("SUCCESS_ADD_FIRST_MODULE", 1);
+      return;
     }
-    if (selectedModules.length === 0) {
-      const correctMod = correctModules[0];
-      const isCorrectMod =
-        mod.code === correctMod.code && mod.subject === correctMod.subject;
-      if (isCorrectMod) {
-        loggingjs.logEvent("SUCCESS_ADD_FIRST_MODULE", 1);
-      }
-    } else if (selectedModules.length === 1) {
-      const correctMod = correctModules[1];
-      const isCorrectMod =
-        mod.code === correctMod.code && mod.subject === correctMod.subject;
-      if (isCorrectMod) {
-        loggingjs.logEvent("SUCCESS_ADD_SECOND_MODULE", 1);
-      }
-    } else if (selectedModules.length === 2) {
-      const correctMod = correctModules[2];
-      const isCorrectMod =
-        mod.code === correctMod.code && mod.subject === correctMod.subject;
-      if (isCorrectMod) {
-        loggingjs.logEvent("SUCCESS_ADD_THIRD_MODULE", 1);
-      }
+    const secondMod = correctModules[1];
+    if (mod.code === secondMod.code && mod.subject === secondMod.subject) {
+      loggingjs.logEvent("SUCCESS_ADD_SECOND_MODULE", 1);
+      return;
+    }
+    const thirdMod = correctModules[2];
+    if (mod.code === thirdMod.code && mod.subject === thirdMod.subject) {
+      loggingjs.logEvent("SUCCESS_ADD_THIRD_MODULE", 1);
+      return;
     }
   }
 

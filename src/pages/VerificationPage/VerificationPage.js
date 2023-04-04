@@ -61,8 +61,10 @@ function mapStateToProps(state) {
     const modulesMissing = correctModules.filter((mod) => {
       const isAdded = moduleCart.find((modAdded) => modAdded.subject === mod.subject && modAdded.code === mod.code);
       return !isAdded;
-    }).join(', ');
+    }).map((mod) =>  `${mod.subject}${mod.code}`).join(', ');
     loggingjs.logEvent("MISSING_MODULES", modulesMissing);
+    const modsAdded = moduleCart.map((mod) => `${mod.subject}${mod.code}`).join(', ');
+    loggingjs.logEvent("ALL_MODULES", modsAdded);
     loggingjs.logEvent("FAIL", "1");
   }
   return {

@@ -35,8 +35,8 @@ function HomePage({moduleCart, removeModule, isNewAttempt, startAttempt}) {
     }
     const keys = Object.values(modules).filter((key) => key > 1);
     if (keys.length > 0) {
-      const combined = keys.reduce((a,b) => a + b, 0);
-      loggingjs.logEvent('DUPLICATE_MODS', combined);
+      const numberDuplicates = keys.length;
+      loggingjs.logEvent('DUPLICATE_MODS', numberDuplicates);
     }
     navigate('/verify', {replace: true, });
   }
