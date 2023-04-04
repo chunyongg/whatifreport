@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { removeModule, startAttempt } from "../../actions";
 import loggingjs from '../../logging';
 
-function HomePage({moduleCart, removeModule, isNewAttempt, startAttempt}) {
+function HomePage({moduleCart, removeModule, isNewAttempt, startAttempt, correctModules}) {
   const navigate = useNavigate();
   const openCourseCatalog = () => {
     if (isNewAttempt) {
@@ -38,8 +38,32 @@ function HomePage({moduleCart, removeModule, isNewAttempt, startAttempt}) {
       const numberDuplicates = keys.length;
       loggingjs.logEvent('DUPLICATE_MODS', numberDuplicates);
     }
+
+    const isIdentical =
+    moduleCart.length === correctModules.length &&
+    moduleCart.every((currentMod) => {
+      const correctMod = correctModules.filter(
+        (mod) =>
+          mod.subject === currentMod.subject && mod.code === currentMod.code
+      );
+      return correctMod.length > 0;
+    });
+  if (isIdentical) {
+    loggingjs.logEvent("COMPLETE", "1");
+  } else {
+    const modulesMissing = correctModules.filter((mod) => {
+      const isAdded = moduleCart.find((modAdded) => modAdded.subject === mod.subject && modAdded.code === mod.code);
+      return !isAdded;
+    }).map((mod) =>  `${mod.subject}${mod.code}`).join(', ');
+    loggingjs.logEvent("MISSING_MODULES", modulesMissing);
+    const modsAdded = moduleCart.map((mod) => `${mod.subject}${mod.code}`).join(', ');
+    loggingjs.logEvent("ALL_MODULES", modsAdded);
+    loggingjs.logEvent("CORRECT_MODULES", correctModules.map((mod) => `${mod.subject}${mod.code}`).join(', '))
+    loggingjs.logEvent("FAIL", "1");
+  }
     navigate('/verify', {replace: true, });
   }
+
   const [showPopup, setShowPopup] = useState(false);
   const [moduleToDelete, setModuleToDelete] = useState(null);
   const handleDeleteModule = (module) => {
@@ -246,9 +270,12 @@ function HomePage({moduleCart, removeModule, isNewAttempt, startAttempt}) {
 
 function mapStateToProps(state) {
   const moduleCart = state.moduleCart;
+  const data = state.data;
+  const correctModules = data.correctModules;
   return {
     moduleCart,
     isNewAttempt: state.data.isNewAttempt,
+    correctModules
   };
 }
 

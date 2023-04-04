@@ -3,7 +3,6 @@ import styles from "./VerificationPage.module.css";
 import BlueButton from "../../components/BlueButton";
 import { useNavigate } from "react-router-dom";
 import { getSuccessCode } from "../../constants";
-import loggingjs from "../../logging";
 import { connect } from "react-redux";
 import { resetModuleAddedList, restart } from "../../actions";
 
@@ -54,19 +53,13 @@ function mapStateToProps(state) {
           mod.subject === currentMod.subject && mod.code === currentMod.code
       );
       return correctMod.length > 0;
-    });
-  if (isIdentical) {
-    loggingjs.logEvent("COMPLETE", "1");
-  } else {
-    const modulesMissing = correctModules.filter((mod) => {
-      const isAdded = moduleCart.find((modAdded) => modAdded.subject === mod.subject && modAdded.code === mod.code);
-      return !isAdded;
-    }).map((mod) =>  `${mod.subject}${mod.code}`).join(', ');
-    loggingjs.logEvent("MISSING_MODULES", modulesMissing);
-    const modsAdded = moduleCart.map((mod) => `${mod.subject}${mod.code}`).join(', ');
-    loggingjs.logEvent("ALL_MODULES", modsAdded);
-    loggingjs.logEvent("FAIL", "1");
-  }
+    }) && correctModules.every((correctMod) => {
+      const isInList = moduleCart.filter(
+        (mod) =>
+          mod.subject === correctMod.subject && mod.code === correctMod.code
+      );
+      return isInList.length > 0;
+    })
   return {
     isIdentical,
   };

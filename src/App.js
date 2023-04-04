@@ -11,6 +11,7 @@ import rootReducer from "./reducers";
 import loggingjs, { IVs } from "./logging";
 import { IVConditions } from "./data/data";
 import invalidLink from "./assets/404.jpg";
+import DownloadPage from "./pages/DownloadPage";
 const store = createStore(rootReducer);
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
   const path = useLocation().pathname;
   const isRoot = path === "/";
   const validA = Object.keys(IVConditions);
+  const isDownload = path === "/download";
+
   const isAValid = () => {
     if (!a) {
       return false;
@@ -37,9 +40,10 @@ function App() {
     return intB === 1 || intB === 2 || intB === 3;
   };
   const isValidLink = () => {
-    return (isAValid() && isBValid() && isRoot) || isInit;
+    return (isAValid() && isBValid() && isRoot) || isInit || isDownload;
   };
-  if (!isInit && isValidLink()) {
+
+  if (!isInit && isValidLink() && !isDownload) {
     IVs.IV1 = IVConditions[a].IV1;
     IVs.IV2 = IVConditions[a].IV2;
     IVs.IV3 = IVConditions[a].IV3;
@@ -60,6 +64,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/home" element={<HomePage />} />
+            <Route path = "/download" element={<DownloadPage />} />
             <Route
               path="/catalog"
               element={
