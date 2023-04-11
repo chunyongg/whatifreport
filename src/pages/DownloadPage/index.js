@@ -14,7 +14,6 @@ function DownloadPage() {
   const submit = (e) => {
     e.preventDefault();
     const res = getProcessedData(files, filter);
-    console.log(res)
     const finalCsv = Papa.unparse(res);
     const blob = new Blob([finalCsv], { type: "text/csv" });
     const url = window.URL.createObjectURL(blob);

@@ -14,6 +14,7 @@ import { IVConditions } from "../../data/data";
 function splitIntoTrialTasks(participantEntries) {
   const returnValue = [];
   let entries = [];
+  
   for (let i = 0; i < participantEntries.length; i++) {
     const entry = participantEntries[i];
     entries.push(entry);
@@ -37,21 +38,22 @@ function getParticipantProcessedData(allParticipantArrangements) {
         const entriesSplitByTrialTask = splitIntoTrialTasks(participantEntries);
         const mappedPerTrialTask = entriesSplitByTrialTask.map(
           (participantEntriesTrialTask) => {
-            const timeTaken = getTimeTakenToSucceed(
+            const {difference: timeTaken, numberAttempts} = getTimeTakenToSucceed(
               participantEntriesTrialTask
             );
-            const timeTakenFirstMod = getTimeTakenToAddFirstModule(
-              participantEntriesTrialTask,);
-            const timeTakenSecondMod = getTimeTakenToAddSubsequentModule(
-              participantEntriesTrialTask,
-              "SUCCESS_ADD_SECOND_MODULE",
-              "SUCCESS_ADD_FIRST_MODULE"
-            );
-            const timeTakenThirdMod = getTimeTakenToAddSubsequentModule(
-              participantEntriesTrialTask,
-              "SUCCESS_ADD_THIRD_MODULE",
-              "SUCCESS_ADD_SECOND_MODULE",
-            );
+            const averageTimeTakenFindability = getAverageFindabilityTime(participantEntriesTrialTask);
+            // const timeTakenFirstMod = getTimeTakenToAddFirstModule(
+            //   participantEntriesTrialTask,);
+            // const timeTakenSecondMod = getTimeTakenToAddSubsequentModule(
+            //   participantEntriesTrialTask,
+            //   "SUCCESS_ADD_SECOND_MODULE",
+            //   "SUCCESS_ADD_FIRST_MODULE"
+            // );
+            // const timeTakenThirdMod = getTimeTakenToAddSubsequentModule(
+            //   participantEntriesTrialTask,
+            //   "SUCCESS_ADD_THIRD_MODULE",
+            //   "SUCCESS_ADD_SECOND_MODULE",
+            // );
             const firstClickAccuracy = getFirstClickSucceedOrNot(
               participantEntriesTrialTask
             );
@@ -67,9 +69,8 @@ function getParticipantProcessedData(allParticipantArrangements) {
               IV2,
               IV3,
               timeTaken,
-              timeTakenFirstMod,
-              timeTakenSecondMod,
-              timeTakenThirdMod,
+              numberAttempts,
+              averageTimeTakenFindability,
               firstClickAccuracy,
               duplicateErrors,
               missingErrors,
@@ -91,7 +92,6 @@ function checkIsParticipantEntriesValid(participantArrangements) {
     "SUCCESS_ADD_FIRST_MODULE",
     "SUCCESS_ADD_SECOND_MODULE",
     "SUCCESS_ADD_THIRD_MODULE",
-    "FIRST_CLICK_SUCCESS",
   ];
   for (const participantEntries of participantArrangements) {
     for (const field of compulsoryFields) {
@@ -135,13 +135,14 @@ function groupByParticipants(rows) {
 
 export default function getProcessedData(data, participantId) {
   const rows = data.data;
+  //checkNumberParticipants(rows)
   let filtered = rows;
   if (participantId) {
     filtered = rows.filter((row) => row[1] === participantId);
   }
   filtered = filtered.filter((row) => {
     const notTest = !row[1].includes("test");
-    const dateStarted = new Date("2023-04-02T16:00:00Z").getTime();
+    const dateStarted = new Date("2023-04-08T16:00:00Z").getTime();
     return parseInt(row[2]) > dateStarted && notTest;
   });
   return convertToObjects(filtered);
@@ -161,8 +162,22 @@ function getTimeTakenToSucceed(participantEntries) {
     base = restart[restart.length - 1];
   }
   const diff = end.timestamp - base.timestamp;
-  const diffInSeconds = diff / 1000;
-  return diffInSeconds;
+  if (restart.length > 1) {
+    let sum = 0;
+    const failsAndSucceeds = participantEntries.filter((event) => event.event === 'COMPLETE' || event.event === 'FAIL');
+
+    for (let i = 0; i < restart.length; i++) {
+      const attempt = restart[i];
+      const startTime = parseInt(attempt.timestamp);
+      const completion = failsAndSucceeds[i];
+      const completionTime = parseInt(completion.timestamp);
+      const diff = completionTime - startTime;
+      sum += diff;
+    }
+    return {difference: sum / 1000, numberAttempts: restart.length};
+  }
+  const diffInSeconds = (diff / 1000);
+  return {difference: diffInSeconds, numberAttempts: restart.length};
 }
 
 function getNumberOfMissingModErrors(participantEntries) {
@@ -179,6 +194,8 @@ function getNumberOfMissingModErrors(participantEntries) {
     }
   }, 0);
 }
+
+
 
 function getNumberOfDuplicateErrors(participantEntries) {
   // Returns number of duplicate errors
@@ -209,66 +226,126 @@ function getFirstClickSucceedOrNot(participantEntries) {
   return pass.length > 0;
 }
 
-function getTimeTakenToAddSubsequentModule(participantEntries, key, base) {
-    // Get the longest time taken
-    let addMods = participantEntries
-      .filter((entries) => entries.event === key)
-      .sort((a, b) => a.timestamp - b.timestamp);
+// function getTimeTakenToAddSubsequentModule(participantEntries, key, base) {
+//     // Get the longest time taken
+//     let addMods = participantEntries
+//       .filter((entries) => entries.event === key)
+//       .sort((a, b) => a.timestamp - b.timestamp);
 
-    let startTimes = participantEntries
-      .filter(
-        (entries) =>
-          entries.event === base
-      )
-      .sort((a, b) => a.timestamp - b.timestamp);
+//     let startTimes = participantEntries
+//       .filter(
+//         (entries) =>
+//           entries.event === base
+//       )
+//       .sort((a, b) => a.timestamp - b.timestamp);
 
-    let currHighest;
+//     let currHighest;
 
-    const addFiltered = addMods.filter((addModEvent) => {
-        const timestamp = addModEvent.timestamp;
-        const hasStartBeforeIt = startTimes.find((startEvent)  => startEvent.timestamp < timestamp);
-        if (!hasStartBeforeIt) {
-            return false;
-        }
-        return true;
-    })
+//     const addFiltered = addMods.filter((addModEvent) => {
+//         const timestamp = addModEvent.timestamp;
+//         const hasStartBeforeIt = startTimes.find((startEvent)  => startEvent.timestamp < timestamp);
+//         if (!hasStartBeforeIt) {
+//             return false;
+//         }
+//         return true;
+//     })
   
-    for (let i = 0; i < addFiltered.length; i++) {
-     if (i + 1 > startTimes.length) {
-        // user added subsequent mod more than once, just track first value
-        continue;
-     }
-      const addMod = addFiltered[i];
-      const start = startTimes[i];
-      const diff = addMod.timestamp - start.timestamp;
-      if (!currHighest || currHighest < diff) {
-        currHighest = diff;
-      }
-    }
-    return currHighest / 1000;
-  }
+//     for (let i = 0; i < addFiltered.length; i++) {
+//      if (i + 1 > startTimes.length) {
+//         // user added subsequent mod more than once, just track first value
+//         continue;
+//      }
+//       const addMod = addFiltered[i];
+//       const start = startTimes[i];
+//       const diff = addMod.timestamp - start.timestamp;
+//       if (!currHighest || currHighest < diff) {
+//         currHighest = diff;
+//       }
+//     }
+//     const val = currHighest / 1000;
+//     if (isNaN(val)) {
+//       console.log(participantEntries);
+//         return 'Invalid'
+//     }
+//     return val;
+//   }
 
-function getTimeTakenToAddFirstModule(participantEntries) {
-  // Get the longest time taken
-  const addMods = participantEntries
-    .filter((entries) => entries.event === 'SUCCESS_ADD_FIRST_MODULE')
-    .sort((a, b) => a.timestamp - b.timestamp);
-  const startTimes = participantEntries
-    .filter(
-      (entries) =>
-        entries.event === "FIND_MODULES_START"
-    )
-    .sort((a, b) => a.timestamp - b.timestamp);
-  let currHighest;
-  for (let i = 0; i < addMods.length; i++) {
-    const addMod = addMods[i];
-    const start = startTimes[i];
-    const diff = addMod.timestamp - start.timestamp;
-    if (!currHighest || currHighest < diff) {
-      currHighest = diff;
+// function getTimeTakenToAddFirstModule(participantEntries) {
+//   // Get the longest time taken
+//   const addMods = participantEntries
+//     .filter((entries) => entries.event === 'SUCCESS_ADD_FIRST_MODULE')
+//     .sort((a, b) => a.timestamp - b.timestamp);
+//   const startTimes = participantEntries
+//     .filter(
+//       (entries) =>
+//         entries.event === "FIND_MODULES_START"
+//     )
+//     .sort((a, b) => a.timestamp - b.timestamp);
+//   const base = parseInt(startTimes[startTimes.length - 1].timestamp);
+//   const addModsFiltered = addMods.filter((event) => {
+//     const isTrue = parseInt(event.timestamp) > base;
+//     return isTrue;
+//   });
+//   let currHighest;
+//   for (let i = 0; i < addModsFiltered.length; i++) {
+//     const addMod = addModsFiltered[i];
+//     const diff = addMod.timestamp - base;
+//     if (!currHighest || currHighest < diff) {
+//       currHighest = diff;
+//     }
+//   }
+//   return currHighest / 1000;
+// }
+
+function getAttemptStartTime(attempt, i, participantEntries) {
+  const attemptSubmissionTime = parseInt(attempt.timestamp);
+  const tmp = participantEntries.filter((event) => event.event === 'FIND_MODULES_START' && parseInt(event.timestamp) < attemptSubmissionTime);
+  const startEvent = tmp[i]; //get start event, corresponding to the start time of this attempt
+  return startEvent;
+}
+
+function getAverageFindabilityTime(participantEntries) {
+  const attempts = participantEntries.filter(entries => entries.event === "COMPLETE" || entries.event === "FAIL");
+  let sumOfAverages = 0;
+  let count = 0;
+  for (let i = 0; i < attempts.length; i++) {
+    const attempt = attempts[i];
+    const attemptSubmissionTime = parseInt(attempt.timestamp);
+    const tmp = participantEntries.filter((event) => event.event === 'FIND_MODULES_START' && parseInt(event.timestamp) < attemptSubmissionTime);
+    const startEvent = tmp[i]; //get start event, corresponding to the start time of this attempt
+
+    if (tmp.length !== attempts.length) {
+      //console.log(participantEntries)
     }
+
+    if (!startEvent) {
+      continue;
+    }
+
+    const startTime = parseInt(startEvent.timestamp);
+
+    const filteredFindTimes = participantEntries.filter((entry) => {
+      const isAddModule = entry.event === 'SUCCESS_ADD_FIRST_MODULE' || entry.event === 'SUCCESS_ADD_SECOND_MODULE' || entry.event === 'SUCCESS_ADD_THIRD_MODULE';
+      const isAfterStart = parseInt(entry.timestamp) > startTime;
+      let isAfterOtherStart = false;
+      for (let j = i + 1; j < attempts.length; j++) {
+        const otherAttempt = attempts[j];
+        const otherAttemptStartTime = getAttemptStartTime(otherAttempt, j, participantEntries);
+        const otherAttemptTimestamp = parseInt(otherAttemptStartTime.timestamp);
+        if (!isAfterOtherStart) {
+          isAfterOtherStart = parseInt(entry.timestamp) > otherAttemptTimestamp;
+        }
+      }
+      return isAfterStart && isAddModule && !isAfterOtherStart;
+    })
+
+    const sortedFindTimes = filteredFindTimes.map((event) => parseInt(event.timestamp) - startTime).sort((a,b) => a - b);
+    const totalFindTimes = sortedFindTimes.reduce((a,b) => a + b, 0);
+    const avgFindTime = totalFindTimes / filteredFindTimes.length;
+    sumOfAverages += avgFindTime;
+    count++;
   }
-  return currHighest / 1000;
+  return (sumOfAverages / count) / 1000;
 }
 
 function groupParticipantEntryByArrangements(participants) {
@@ -308,23 +385,60 @@ function flatten(rows) {
 
 function convertOutputToObject(input) {
   const mapped = input.map((res) => ({
-    participantId: res[0],
-    filteringTechnique: res[1],
-    numberOfModulesAdded: res[2],
-    presenceOfModuleCart: res[3],
-    timeTaken: res[4],
-    firstModuleTimeTaken: res[5],
-    secondModuleTimeTaken: res[6],
-    thirdModuleTimeTaken: res[7],
-    firstClickCorrect: res[8],
-    numberDuplicates: res[9],
-    numberMissing: res[10],
+    'Participant ID': res[0],
+    'Filtering Technique': res[1],
+    'Number of Modules Added': res[2],
+    'Presence of Module Cart': res[3],
+    'Time taken (seconds)': res[4],
+    'Number of attempts': res[5],
+    'Average time taken to find module (seconds)': res[6],
+    'First click accurate': res[7],
+    'Number of duplicates added': res[8],
+    'Number of missing modules': res[9],
   }));
   return mapped;
 }
 
+function checkNumberOfTrialsPerParticipant(rows) {
+  const obj = {};
+  for (const row of rows) {
+    const value = obj[row[0]];
+    if (!value) {
+      obj[row[0]] = 1;
+    } else {
+      obj[row[0]] = value + 1;
+    }
+  }
+  console.log('Number participants', Object.keys(obj).length);
+  for (const [key, value] of Object.entries(obj)) {
+    if (value !== 18) {
+      console.log(`Participant ${key} has abnormal number of entries, ${value}`)
+    }
+  }
+}
+
+function checkNumberParticipants(rows) {
+  const obj = {};
+  for (const row of rows) {
+    const timestamp = parseInt(row[2]);
+    const pptId = row[1];
+    const dateStarted = new Date("2023-04-02T16:00:00Z").getTime();
+    const cutOffDate = new Date("2023-04-08T16:00:00Z").getTime();
+    if (pptId.includes('test') || pptId === 'A3RHBJAOW5CDTS' || timestamp < dateStarted || timestamp > cutOffDate) {
+      continue;
+    }
+    console.log(pptId)
+    const value = obj[pptId];
+    if (!value) {
+      obj[pptId] = 1;
+    }
+  }
+  console.log('num ppt', Object.keys(obj).length, Object.keys(obj))
+}
+
 function convertToObjects(rows) {
   const filtered = rows.filter((row) => isAllDataValidForRow(row));
+  console.log(rows.length, filtered.length)
   const mappedToObjects = filtered.map((row) => convertToObject(row));
   const groupedByParticipantID = groupByParticipants(mappedToObjects);
   const groupedByArrangement = groupParticipantEntryByArrangements(
@@ -333,11 +447,15 @@ function convertToObjects(rows) {
   const filteredAndGroupedByArrangement = groupedByArrangement.filter(
     (participantEntries) => {
       const error = checkIsParticipantEntriesValid(participantEntries);
+      if (error) {
+        console.log(participantEntries, error)
+      }
       return error === undefined;
     }
   );
   const data = getParticipantProcessedData(filteredAndGroupedByArrangement);
   const flattened = flatten(data);
+  checkNumberOfTrialsPerParticipant(flattened);
   const convertedToObject = convertOutputToObject(flattened);
   return convertedToObject;
 }
@@ -365,6 +483,7 @@ function isEventValid(row) {
     "DUPLICATE_MODS",
     "COMPLETE",
     "MISSING_MODULES",
+    "CORRECT_MODULES",
     "ALL_MODULES",
     "FAIL",
   ];
