@@ -3,6 +3,8 @@
 This project is created as part of CS4249 in the National University of Singapore to perform quantitative UX research.
 The project is built with the React framework, uses React-Redux for state management and a modified Loggingjs to log user events
 
+The website is deployed at https://ijustwanttograduate-f330d.web.app/
+
 ## Getting started
 
 ### Tools You Need
